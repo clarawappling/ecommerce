@@ -1,7 +1,22 @@
+import { useEffect } from "react";
+import { useProduct } from "../hooks/useProduct"
+
 export const ManageProducts = () => {
+    
+    const {products, isLoading, error, fetchProductsHandler} = useProduct();
+
+    useEffect (() => {
+        fetchProductsHandler();
+    }, [])
+
+    if (isLoading) return <p>Loading..</p>
+    if (error) return <p>{error}</p>
     return (
-        <>
-        <h1>Visa produkter och möjliggör att ta bort produkter</h1>
-        </>
+        <div>
+            {products.map((product) => (
+                
+            ))}
+        
+        </div>
     )
 }
