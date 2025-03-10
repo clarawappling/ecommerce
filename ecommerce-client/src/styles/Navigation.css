@@ -1,0 +1,8 @@
+#main-nav {
+    ul {
+        display: flex;
+        list-style: none;
+        justify-content: flex-end;
+        gap: 10rem;
+    }
+}
