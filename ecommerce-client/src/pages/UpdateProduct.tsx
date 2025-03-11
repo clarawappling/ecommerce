@@ -18,12 +18,12 @@ export const UpdateProduct = () => {
     }, []
 )
 
-const handleChange= (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+const handleChange= (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     if(!product) return;
     if(e.target.type === "number") {
-        setProduct({...product, [e.currentTarget.name]: +e.currentTarget.value})
+        setProduct({...product, [e.target.name]: +e.target.value})
     } else {
-        setProduct({...product, [e.currentTarget.name]: e.currentTarget.value})
+        setProduct({...product, [e.target.name]: e.target.value})
     }
 }
 
@@ -90,7 +90,7 @@ const handleSubmit = async (e:FormEvent) => {
                     onChange={(e) => {handleChange(e)}}
                     />
                    <label htmlFor="category">Välj kategori:</label>
-                        <select id="category" name="category">
+                        <select id="category" name="category" value={product?.category ?? ''} onChange={handleChange}>
                         <option value="Kläder">Kläder</option>
                         <option value="Prydnader">Prydnader</option>
                         <option value="Teknik">Teknik</option>
