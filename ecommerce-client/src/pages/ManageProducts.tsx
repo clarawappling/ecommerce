@@ -13,10 +13,18 @@ export const ManageProducts = () => {
     if (error) return <p>{error}</p>
     return (
         <div>
-            {products.map((product) => (
-                
-            ))}
-        
+            <h2>Produktlista</h2>
+            <div className="product-list">
+                {
+                    products.map((product) => (
+                        <article className="prouct-item">
+                            <p>{product.name}</p>
+                        </article>
+                    )
+                    )
+                }
+            </div>
+         
         </div>
     )
 }
