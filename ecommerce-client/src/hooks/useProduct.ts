@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { Product } from "../models/Product"
-import { deleteProduct, fetchProductById, fetchProducts } from "../services/productService";
+import { Product, ProductUpdate } from "../models/Product"
+import { deleteProduct, fetchProductById, fetchProducts, updateProductByID } from "../services/productService";
 
 export const useProduct = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -34,6 +34,16 @@ export const useProduct = () => {
         }
     }
 
+    const updateProductHandler = async (id: number, payload: ProductUpdate) => {
+        try {
+            await updateProductByID(id, payload)
+        } catch (error) {
+            setError("Error updating product");
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     const deleteProductHandler = async (id: number) => {
         setIsLoading(true);
@@ -54,6 +64,7 @@ export const useProduct = () => {
         error, 
         fetchProductsHandler,
         deleteProductHandler,
-        fetchProductByIdHandler
+        fetchProductByIdHandler,
+        updateProductHandler
     }
 }

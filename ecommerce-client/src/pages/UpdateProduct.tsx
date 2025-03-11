@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { Product } from "../models/Product"
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useProduct } from "../hooks/useProduct";
 import "../styles/UpdateProduct.css"
 
@@ -8,7 +8,8 @@ export const UpdateProduct = () => {
     
     const [product, setProduct] = useState<Product | null>(null);
     const params = useParams();
-    const {isLoading, error, fetchProductByIdHandler} = useProduct();
+    const {isLoading, error, fetchProductByIdHandler, updateProductHandler} = useProduct();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(!params.id) return;
@@ -26,9 +27,20 @@ const handleChange= (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => 
     }
 }
 
-const handleSubmit = () => {
-
+const handleSubmit = async (e:FormEvent) => {
+    e.preventDefault()
+    if(!product) return;
+    await updateProductHandler(product.id, {
+        name: product.name, 
+        description: product.description,
+        stock: product.stock,
+        price: product.price,
+        category: product.category,
+        image: product.image
+    })
+    navigate("/admin/products")
 }
+
      if(isLoading) return <p>Loading..</p>
      if(error) return <p>{error}</p>
 
@@ -83,6 +95,7 @@ const handleSubmit = () => {
                         <option value="Prydnader">Prydnader</option>
                         <option value="Teknik">Teknik</option>
                         </select>
+                        <button>Uppdatera</button>
 
                 </form>
             </div>
