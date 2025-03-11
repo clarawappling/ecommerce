@@ -8,3 +8,5 @@ export type Product = {
     image: string;
     created_at: string
 }
+
+export type ProductUpdate = Omit<Product, 'id' | 'created_at'>;
