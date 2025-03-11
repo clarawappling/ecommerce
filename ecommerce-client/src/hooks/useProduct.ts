@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Product } from "../models/Product"
-import { fetchProducts } from "../services/productService";
+import { deleteProduct, fetchProductById, fetchProducts } from "../services/productService";
 
 export const useProduct = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -21,10 +21,38 @@ export const useProduct = () => {
         }
     }
 
+    const fetchProductByIdHandler = async (id: number) => {
+        setIsLoading(true)
+        
+        try {
+            return await fetchProductById(id);
+        } catch (error) {
+            setError("Error getting product")
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+
+    const deleteProductHandler = async (id: number) => {
+        setIsLoading(true);
+        try {
+            await deleteProduct(id);
+            const newList = products.filter(product => product.id !== id);
+            setProducts(newList);
+        } catch (error) {
+            setError("Error deleting product");
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    } 
     return { 
         products, 
         isLoading, 
         error, 
-        fetchProductsHandler 
+        fetchProductsHandler,
+        deleteProductHandler
     }
 }
