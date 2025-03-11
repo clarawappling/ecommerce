@@ -53,6 +53,7 @@ export const useProduct = () => {
         isLoading, 
         error, 
         fetchProductsHandler,
-        deleteProductHandler
+        deleteProductHandler,
+        fetchProductByIdHandler
     }
 }
