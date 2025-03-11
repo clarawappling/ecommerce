@@ -20,10 +20,13 @@ export const UpdateProduct = () => {
 
 const handleChange= (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     if(!product) return;
-    if(e.target.type === "number") {
-        setProduct({...product, [e.target.name]: +e.target.value})
+
+    const {type, name, value} = e.target;
+
+    if(type === "number") {
+        setProduct({...product, [name]: +value})
     } else {
-        setProduct({...product, [e.target.name]: e.target.value})
+        setProduct({...product, [name]: value})
     }
 }
 
