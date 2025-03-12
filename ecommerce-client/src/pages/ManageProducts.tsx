@@ -24,7 +24,7 @@ export const ManageProducts = () => {
             <div className="product-list">
                 {
                     products.map((product) => (
-                        <article className="product-item">
+                        <article className="product-item" key={product.id}>
                             <p>{product.name}</p>
                             <p>{product.description}</p>
                             <p>{product.price}</p>

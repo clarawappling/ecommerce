@@ -97,6 +97,9 @@ const handleSubmit = async (e:FormEvent) => {
                         <option value="Kläder">Kläder</option>
                         <option value="Prydnader">Prydnader</option>
                         <option value="Teknik">Teknik</option>
+                        <option value="Utomhuslek">Utomhuslek</option>
+                        <option value="Sport">Sport</option>
+                        <option value="Övriga leksaker">Övriga leksaker</option>
                         </select>
                         <button>Uppdatera</button>
 
