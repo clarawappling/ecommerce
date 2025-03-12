@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import { ProductCreate } from "../models/Product"
 import { useProduct } from "../hooks/useProduct"
 import { useNavigate } from "react-router"
+import { NavigationAdmin } from "../components/NavigationAdmin"
 
 export const CreateProduct = () => {
     const [product, setProduct] = useState<ProductCreate>({name:"", description:"", price:0, stock:0, category:"", image:""})
@@ -37,6 +38,7 @@ export const CreateProduct = () => {
 
     return (
         <>
+        <NavigationAdmin />
         <div className="product-container">
                 <h2>Uppdatera produkt</h2>
                 <form onSubmit={handleSubmit}>
