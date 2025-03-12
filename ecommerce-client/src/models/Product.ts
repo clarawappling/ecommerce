@@ -10,3 +10,4 @@ export type Product = {
 }
 
 export type ProductUpdate = Omit<Product, 'id' | 'created_at'>;
+export type ProductCreate = Omit<Product, 'id' | 'created_at'>;

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { Product, ProductUpdate } from "../models/Product"
+import { Product, ProductCreate, ProductUpdate } from "../models/Product"
 
 const PRODUCTS_URL = "http://localhost:3000/products"
 
@@ -26,6 +26,20 @@ export const fetchProductById = async (id: number): Promise<Product> => {
     }
 }
 
+
+
+
+// CREATE PRODUCT
+
+export const createProduct = async (payload: ProductCreate) => {
+    try {
+        await axios.post(`${PRODUCTS_URL}`, payload)
+    } catch (error) {
+        console.log(error)
+        throw error;
+    }
+
+}
 
 // UPDATE PRODUCT
 // Add type of response to promise, an object with a message? Testa att köra utan return

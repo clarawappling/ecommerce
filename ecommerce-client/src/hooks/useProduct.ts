@@ -1,12 +1,14 @@
 import { useState } from "react"
-import { Product, ProductUpdate } from "../models/Product"
-import { deleteProduct, fetchProductById, fetchProducts, updateProductByID } from "../services/productService";
+import { Product, ProductCreate, ProductUpdate } from "../models/Product"
+import { createProduct, deleteProduct, fetchProductById, fetchProducts, updateProductByID } from "../services/productService";
 
 export const useProduct = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [error, setError] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
+
+    // GET ALL PRODUCTS
     const fetchProductsHandler = async () => {
         setIsLoading(true);
 
@@ -21,6 +23,7 @@ export const useProduct = () => {
         }
     }
 
+    // GET SPECIFIC PRODUCT
     const fetchProductByIdHandler = async (id: number) => {
         setIsLoading(true)
         
@@ -34,7 +37,22 @@ export const useProduct = () => {
         }
     }
 
+    // CREATE NEW PRODUCT
+    const createProductHandler = async (payload: ProductCreate) => {
+        setIsLoading(true);
+
+        try {
+            await createProduct(payload);
+        } catch (error) {
+            setError("Error creating a new product")
+            throw error;
+        } finally {
+            setIsLoading(false)
+        }
+    }
+    // UPDATE PRODUCT
     const updateProductHandler = async (id: number, payload: ProductUpdate) => {
+        setIsLoading(true);
         try {
             await updateProductByID(id, payload)
         } catch (error) {
@@ -44,7 +62,7 @@ export const useProduct = () => {
             setIsLoading(false);
         }
     }
-
+    // DELETE PRODUCT
     const deleteProductHandler = async (id: number) => {
         setIsLoading(true);
         try {
@@ -58,6 +76,9 @@ export const useProduct = () => {
             setIsLoading(false);
         }
     } 
+
+
+    // RETURN ALL OF THE THESE
     return { 
         products, 
         isLoading, 
@@ -65,6 +86,7 @@ export const useProduct = () => {
         fetchProductsHandler,
         deleteProductHandler,
         fetchProductByIdHandler,
-        updateProductHandler
+        updateProductHandler,
+        createProductHandler
     }
 }

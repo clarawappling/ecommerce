@@ -20,10 +20,13 @@ export const UpdateProduct = () => {
 
 const handleChange= (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     if(!product) return;
-    if(e.target.type === "number") {
-        setProduct({...product, [e.target.name]: +e.target.value})
+
+    const {type, name, value} = e.target;
+
+    if(type === "number") {
+        setProduct({...product, [name]: +value})
     } else {
-        setProduct({...product, [e.target.name]: e.target.value})
+        setProduct({...product, [name]: value})
     }
 }
 
@@ -94,6 +97,9 @@ const handleSubmit = async (e:FormEvent) => {
                         <option value="Kläder">Kläder</option>
                         <option value="Prydnader">Prydnader</option>
                         <option value="Teknik">Teknik</option>
+                        <option value="Utomhuslek">Utomhuslek</option>
+                        <option value="Sport">Sport</option>
+                        <option value="Övriga leksaker">Övriga leksaker</option>
                         </select>
                         <button>Uppdatera</button>
 
