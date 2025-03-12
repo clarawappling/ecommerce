@@ -44,7 +44,7 @@ export const CreateProduct = () => {
                 <input
                     name="name"
                     id="name"
-                    value={product?.name ?? ''}
+                    value={product.name}
                     onChange={(e) => {handleChange(e)}}
 
                   />
@@ -52,7 +52,7 @@ export const CreateProduct = () => {
                   <textarea
                     name="description"
                     id="description"
-                    value={product?.description ?? ''}
+                    value={product.description}
                     onChange={(e) => {handleChange(e)}}
                   />
                   <label htmlFor="price">Pris:</label>
@@ -60,7 +60,7 @@ export const CreateProduct = () => {
                   type="number"
                   name="price"
                   id="price"
-                  value={product?.price ?? ''}
+                  value={product.price}
                   onChange={(e) => {handleChange(e)}}
 
                   />
@@ -69,7 +69,7 @@ export const CreateProduct = () => {
                   type="number"
                   name="stock"
                   id="stock"
-                  value={product?.stock ?? ''}
+                  value={product.stock}
                   onChange={(e) => {handleChange(e)}}
 
                   />
@@ -77,11 +77,11 @@ export const CreateProduct = () => {
                   <input
                     name="image"
                     id="image"
-                    value={product?.image ?? ''}
+                    value={product.image}
                     onChange={(e) => {handleChange(e)}}
                     />
                    <label htmlFor="category">Välj kategori:</label>
-                        <select id="category" name="category" value={product?.category ?? ''} onChange={handleChange}>
+                        <select id="category" name="category" value={product.category} onChange={handleChange}>
                         <option value="Kläder">Kläder</option>
                         <option value="Prydnader">Prydnader</option>
                         <option value="Teknik">Teknik</option>
