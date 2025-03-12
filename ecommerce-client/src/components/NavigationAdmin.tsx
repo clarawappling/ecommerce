@@ -12,6 +12,10 @@ export const NavigationAdmin = () => {
                 <li>
                     <NavLink to={"/admin/products"}>Produktlista</NavLink>
                 </li>
+
+                <li>
+                    <NavLink to={"/admin/orders"}>Orderlista</NavLink>
+                </li>
                 {/* Lägg till customers och ordrar */}
             </ul>
         </nav>
