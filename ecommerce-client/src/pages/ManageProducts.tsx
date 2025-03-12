@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useProduct } from "../hooks/useProduct"
 import "../styles/ManageProducts.css"
 import { useNavigate } from "react-router";
+import { NavigationAdmin } from "../components/NavigationAdmin";
 
 export const ManageProducts = () => {
     const navigate = useNavigate();
@@ -19,6 +20,8 @@ export const ManageProducts = () => {
     if (isLoading) return <p>Loading..</p>
     if (error) return <p>{error}</p>
     return (
+<>
+        <NavigationAdmin />
         <div>
             <h2>Produktlista</h2>
             <div className="product-list">
@@ -39,5 +42,6 @@ export const ManageProducts = () => {
             </div>
          
         </div>
+        </>
     )
 }
