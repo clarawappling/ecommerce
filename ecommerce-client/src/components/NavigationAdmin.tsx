@@ -7,6 +7,7 @@ export const NavigationAdmin = () => {
             <ul>
                 <li>
                     <NavLink to={"/admin/create-product"}>Lägg till produkt</NavLink>
+                    {/* Flytta till produktsidan */}
                 </li>
               
                 <li>
@@ -16,7 +17,7 @@ export const NavigationAdmin = () => {
                 <li>
                     <NavLink to={"/admin/orders"}>Orderlista</NavLink>
                 </li>
-                {/* Lägg till customers och ordrar */}
+                
             </ul>
         </nav>
     )

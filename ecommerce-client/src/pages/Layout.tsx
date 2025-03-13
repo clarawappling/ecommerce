@@ -10,7 +10,8 @@ export const Layout = () => {
     <main>
         <Outlet />
     </main>
-    <footer><p>Footer</p></footer>
+
+    {/* <footer><p>Footer</p></footer> */}
     </>
 )
 }
