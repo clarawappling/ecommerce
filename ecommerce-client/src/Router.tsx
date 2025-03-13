@@ -8,6 +8,7 @@ import { UpdateProduct } from "./pages/UpdateProduct";
 import { Products } from "./pages/Products";
 import { ManageOrders } from "./pages/ManageOrders";
 import { UpdateOrderStatus } from "./pages/UpdateOrderStatus";
+import { DetailedOrder } from "./pages/DetailedOrder";
 
 export const router = createBrowserRouter( [
     {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter( [
              {
                 path: "admin/update-order-status/:id",
                 element: <UpdateOrderStatus />
+             },
+             {
+                path: "/admin/detailed-order/:id",
+                element: <DetailedOrder />
              }
              
                 
