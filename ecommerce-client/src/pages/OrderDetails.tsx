@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { useOrder } from "../hooks/useOrder";
 import { DetailedOrder } from "../models/Order";
 import { NavigationAdmin } from "../components/NavigationAdmin";
@@ -9,6 +9,7 @@ import { useOrderItem } from "../hooks/useOrderItem";
 export const OrderDetails = () => {
     
     const params = useParams();
+    const navigate = useNavigate()
     const {fetchOrderByIdHandler}= useOrder();
     const {deleteOrderItemHandler, error, isLoading} = useOrderItem();
     const [order, setOrder] = useState<DetailedOrder | null>(null);
@@ -18,6 +19,11 @@ export const OrderDetails = () => {
       const idAsNumber = +params.id;
       fetchOrderByIdHandler(idAsNumber).then((data) => setOrder(data))
     })
+
+
+    const handleClick = (id: number, quantity: number, product_name: string) => {
+      navigate("/admin/update-order-item/" + id + "/" + quantity + "/" + product_name)
+    }
 
     if (isLoading) return <p>Loading..</p>
     if (error) return <p>{error}</p>
@@ -46,7 +52,7 @@ export const OrderDetails = () => {
               <p>Antal beställda: {item.quantity}</p>
               <p>À pris: {item.unit_price}</p>
               <button onClick={() => deleteOrderItemHandler(item.id)}>Ta bort</button>
-              <button>Uppdatera</button>
+              <button onClick={() => {handleClick(item.id, item.quantity, item.product_name)}}>Ändra antal</button>
             </div>
           )
         })}

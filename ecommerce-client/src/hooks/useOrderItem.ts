@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { OrderItem } from "../models/OrderItem";
-import { deleteOrderItem } from "../services/orderItemService";
+import { OrderItem, OrderItemUpdate } from "../models/OrderItem";
+import { deleteOrderItem, updateOrderItem } from "../services/orderItemService";
 
 export const useOrderItem = () => {
 
@@ -22,8 +22,21 @@ const deleteOrderItemHandler = async (id: number) => {
         setIsLoading(false)
     }
 }
+
+const updateOrderItemHandler = async (id: number, payload: OrderItemUpdate) => {
+    setIsLoading(true)
+    try {
+        await updateOrderItem(id, payload);
+    } catch (error) {
+        setError("Couldn't update order item")
+        throw error;
+    } finally {
+        setIsLoading(false)
+    }
+}
     return {
         deleteOrderItemHandler,
+        updateOrderItemHandler,
         error,
         isLoading
     }
