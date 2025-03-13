@@ -1,5 +1,5 @@
 import axios from "axios"
-import { Order } from "../models/Order";
+import { DetailedOrder, Order, OrderStatusUpdate } from "../models/Order";
 
 
     const ORDERS_URL = "http://localhost:3000/orders"
@@ -15,6 +15,18 @@ import { Order } from "../models/Order";
         }
     }
 
+    // GET ORDER BY ID
+
+    export const fetchOrderById = async (id: number): Promise <DetailedOrder> => {
+        try {
+            const response = await axios.get(`${ORDERS_URL}/${id}`);
+            return response.data;
+        } catch(error) {
+            console.log(error)
+            throw error;
+        }
+    }
+
     // DELETE ORDER
     export const deleteOrder = async (id: number) => {
         try {
@@ -22,5 +34,17 @@ import { Order } from "../models/Order";
         } catch (error) {
             console.log(error)
             throw error;
+        }
+    }
+
+    // UPDATE ORDER STATUS
+
+    export const updateOrderStatus = async (id: number, payload: OrderStatusUpdate) => {
+        try {
+            await axios.patch(`${ORDERS_URL}/${id}`, payload)
+        } catch (error) {
+            console.log(error);
+            throw error;
+
         }
     }

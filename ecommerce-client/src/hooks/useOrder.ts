@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { Order } from "../models/Order"
-import { deleteOrder, fetchOrders } from "../services/orderService";
+import { DetailedOrder, Order, OrderStatusUpdate } from "../models/Order"
+import { deleteOrder, fetchOrderById, fetchOrders, updateOrderStatus } from "../services/orderService";
 
 export const useOrder = () => {
 
@@ -25,6 +25,22 @@ const fetchOrdersHandler = async () => {
     }
 }
 
+// GET ORDER BY ID
+
+const fetchOrderByIdHandler = async (id: number) => {
+    setIsLoading(true);
+    
+    try {
+        const data: DetailedOrder = await fetchOrderById(id);
+        return data;
+    } catch (error) {
+        setError("Couldn't get order");
+        throw error;
+    } finally {
+        setIsLoading(false);
+    }
+}
+
 // DELETE ORDER
 
 const deleteOrderHandler = async (id: number) => {
@@ -40,11 +56,28 @@ const deleteOrderHandler = async (id: number) => {
     }
 }
 
+
+// UPDATE ORDER STATUS
+
+const updateOrderStatusHandler = async (id: number, payload: OrderStatusUpdate) => {
+    setIsLoading(true);
+
+    try {
+        await updateOrderStatus(id, payload);
+    } catch (error) {
+        setError("Error updating order status")
+    } finally {
+        setIsLoading(false);
+    }
+}
+
 return {
     isLoading,
     error,
     orders,
     fetchOrdersHandler,
-    deleteOrderHandler
+    deleteOrderHandler,
+    updateOrderStatusHandler,
+    fetchOrderByIdHandler
 }
 }

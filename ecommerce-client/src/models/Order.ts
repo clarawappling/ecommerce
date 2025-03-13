@@ -16,3 +16,17 @@ export type Order = {
 	customer_country: string,
 	customers_created_at: string
 }
+
+export type OrderStatusUpdate = Pick <Order, 'order_status' | 'payment_status' | 'payment_id'>
+
+export interface DetailedOrder extends Order {
+	order_items: [
+		{
+			id: number,
+			product_id: number,
+			product_name: string,
+			quantity: number,
+			unit_price: number
+		}
+	]
+}
