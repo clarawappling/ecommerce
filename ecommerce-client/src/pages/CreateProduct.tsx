@@ -40,7 +40,7 @@ export const CreateProduct = () => {
         <>
         <NavigationAdmin />
         <div className="product-container">
-                <h2>Uppdatera produkt</h2>
+                <h2>Lägg till produkt</h2>
                 <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Namn:</label>
                 <input

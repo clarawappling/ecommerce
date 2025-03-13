@@ -1,0 +1,16 @@
+.order-list {
+    
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.order-item {
+    background-color: rgb(236, 253, 247);
+    display: flex;
+    justify-content: space-between;
+    gap: 3px;
+    margin: 5px;
+
+}
