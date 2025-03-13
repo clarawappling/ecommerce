@@ -4,11 +4,13 @@ import { useOrder } from "../hooks/useOrder";
 import { DetailedOrder } from "../models/Order";
 import { NavigationAdmin } from "../components/NavigationAdmin";
 import "../styles/OrderDetails.css";
+import { useOrderItem } from "../hooks/useOrderItem";
 
 export const OrderDetails = () => {
     
     const params = useParams();
     const {fetchOrderByIdHandler}= useOrder();
+    const {deleteOrderItemHandler, error, isLoading} = useOrderItem();
     const [order, setOrder] = useState<DetailedOrder | null>(null);
 
     useEffect(() => {
@@ -16,6 +18,10 @@ export const OrderDetails = () => {
       const idAsNumber = +params.id;
       fetchOrderByIdHandler(idAsNumber).then((data) => setOrder(data))
     })
+
+    if (isLoading) return <p>Loading..</p>
+    if (error) return <p>{error}</p>
+
     return (
         <>
         <NavigationAdmin />
@@ -39,7 +45,7 @@ export const OrderDetails = () => {
               <p>Produkt: {item.product_name}</p>
               <p>Antal beställda: {item.quantity}</p>
               <p>À pris: {item.unit_price}</p>
-              <button>Ta bort</button>
+              <button onClick={() => deleteOrderItemHandler(item.id)}>Ta bort</button>
               <button>Uppdatera</button>
             </div>
           )
