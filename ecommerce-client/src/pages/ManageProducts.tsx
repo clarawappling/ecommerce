@@ -32,9 +32,8 @@ export const ManageProducts = () => {
                     products.map((product) => (
                         <article className="product-item" key={product.id}>
                             <p>{product.name}</p>
-                            <p>{product.description}</p>
-                            <p>{product.price}</p>
-                            <p>{product.stock}</p>
+                            <p>{product.price} SEK</p>
+                            <p>{product.stock} st</p>
                             <button onClick={() => {deleteProductHandler(product.id)}}>Ta bort</button>
                             <button onClick={() => {handleClick(product.id)}}>Uppdatera produkt</button>
                     

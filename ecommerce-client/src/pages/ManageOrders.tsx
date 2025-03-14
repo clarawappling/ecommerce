@@ -31,10 +31,9 @@ export const ManageOrders = () => {
                     {
                         orders.map((order) => (
                             <article className="order-item" key={order.id}>
-                                <Link to={`/admin/detailed-order/${order.id}`}> {order.id} </Link>
-                                <p>{order.customer_firstname} {order.customer_lastname}</p>
-                                <p>{order.total_price}</p>
-                                <p>{order.order_status}</p>
+                                <Link className="order-link" to={`/admin/detailed-order/${order.id}`}> Order-id: {order.id}, {order.customer_firstname} {order.customer_lastname}</Link>
+                                <p>Totalt: {order.total_price} SEK</p>
+                                <p>Status: {order.order_status}</p> 
                                 <button onClick={() => {deleteOrderHandler(order.id)}}>Ta bort</button>
                                 <button onClick={() => {handleClick(order.id)}}>Ändra orderstatus</button>
                             </article>
