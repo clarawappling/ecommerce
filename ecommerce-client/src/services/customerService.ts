@@ -1,0 +1,60 @@
+import axios from "axios";
+import { Customer, CustomerCreate, CustomerUpdate } from "../models/Customer";
+
+
+const CUSTOMERS_URL = "http://localhost:3000/customers"
+
+// GET ALL CUSTOMERS
+export const getAllCustomers = async (): Promise<Customer[]> => {
+    try {
+        const response = await axios.get(CUSTOMERS_URL);
+        return response.data;
+    } catch(error) {
+        console.log(error);
+        throw error;
+    }
+}
+// GET CUSTOMER BY ID
+export const getCustomerById = async (id: number): Promise<Customer> => {
+    try {
+        const response = axios.get(`${CUSTOMERS_URL}/${id}`);
+        return (await response).data;
+    }
+    catch(error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+
+// CREATE CUSTOMER
+export const createCustomer = async (payload: CustomerCreate) => {
+    try {
+        await axios.post(CUSTOMERS_URL, payload);
+    } catch(error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+// UPDATE CUSTOMER
+
+export const updateCustomer = async (id: number, payload: CustomerUpdate) => {
+    try {
+        await axios.patch(`${CUSTOMERS_URL}/${id}`, payload);
+    } catch(error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+// DELETE CUSTOMER
+
+export const deleteCustomer = async (id: number) => {
+    try {
+        await axios.delete(`${CUSTOMERS_URL}/${id}`);
+    } catch(error) {
+        console.log(error);
+        throw error;
+    }
+}
