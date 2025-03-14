@@ -9,7 +9,7 @@ export const Navigation = () => {
                     <NavLink to={"/"}>Hem</NavLink>
                 </li>
                 <li>
-                    <NavLink to={"/products"}>Se produkter</NavLink>
+                    <NavLink to={"/products"}>Sortiment</NavLink>
                 </li>
                 <li>
                     <NavLink to={"/admin/products"}>Admin</NavLink>

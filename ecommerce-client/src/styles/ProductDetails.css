@@ -1,0 +1,20 @@
+#product-image {
+    max-width: 420px;
+  
+}
+
+#product-image:hover {
+  
+    transform: scale(1.07);
+}
+
+#product-customer-item {
+    min-width: 90%; 
+    text-align: center; 
+    gap: 2rem;
+}
+
+#product-customer-item:hover {
+   transform: none; 
+   cursor:default;
+}

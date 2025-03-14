@@ -1,10 +1,9 @@
-main {
+/* main {
     margin: 0 auto;
     display: flex; 
     justify-content: center; 
-    background-color: rgba(240, 235, 229, 0.247);
   
-}
+} */
 
 .product-container-wrapper{
     width: 80%;
@@ -37,7 +36,8 @@ main {
     border-radius: 10px;
 }
 
-.product-item:hover {
+
+.product-customer-item:hover {
     transform: scale(1.03);
     cursor: pointer;
 }
@@ -49,6 +49,7 @@ main {
     object-fit: cover;
     border-radius: 8px;
 }
+
 
 .product-name {
     margin: 10px 0;
