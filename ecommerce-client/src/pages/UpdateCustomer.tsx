@@ -50,7 +50,6 @@ export const UpdateCustomer = () => {
 
     return (
         <>
-        <NavigationAdmin />
         <div className="customer-container">
             <h2>Uppdatera kundinformation</h2>
             <form onSubmit={handleSubmit}>
@@ -89,10 +88,10 @@ export const UpdateCustomer = () => {
                     value={customer?.password ?? ''}
                     onChange={(e) => {handleChange(e)}}
                 />
-                   <label htmlFor="street_adress">Gatuadress: </label>
+                   <label htmlFor="street_address">Gatuadress: </label>
                 <input
-                    name="street_adress"
-                    id="street_adress"
+                    name="street_address"
+                    id="street_address"
                     value={customer?.street_address ?? ''}
                     onChange={(e) => {handleChange(e)}}
                 />
@@ -123,6 +122,7 @@ export const UpdateCustomer = () => {
             <br></br>
             <button onClick={handleClick}>Avbryt</button>
         </div>
+        <NavigationAdmin />
         </>
     )
 }

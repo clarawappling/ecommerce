@@ -49,10 +49,9 @@ export const CreateCustomer = () => {
           
     if(isLoading) return <p>Loading..</p>
     if(error) return <p>{error}</p>
-    
+
     return (
             <>
-            <NavigationAdmin />
             <div className="customer-container">
                 <h2>Kundens information</h2>
                 <form onSubmit={handleSubmit}>
@@ -91,10 +90,10 @@ export const CreateCustomer = () => {
                         value={customer?.password ?? ''}
                         onChange={(e) => {handleChange(e)}}
                     />
-                       <label htmlFor="street_adress">Gatuadress: </label>
+                       <label htmlFor="street_address">Gatuadress: </label>
                     <input
-                        name="street_adress"
-                        id="street_adress"
+                        name="street_address"
+                        id="street_address"
                         value={customer?.street_address ?? ''}
                         onChange={(e) => {handleChange(e)}}
                     />
@@ -125,6 +124,7 @@ export const CreateCustomer = () => {
                 <br></br>
                 <button onClick={handleClick}>Avbryt</button>
             </div>
+            <NavigationAdmin />
             </>
         )
 }

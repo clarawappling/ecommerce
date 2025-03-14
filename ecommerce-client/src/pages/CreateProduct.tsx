@@ -33,12 +33,16 @@ export const CreateProduct = () => {
         navigate("/admin/products");
     }
 
+    const handleClick = () => {
+        navigate("/admin/products");
+    }
+
     if(isLoading) return <p>Loading..</p>
     if(error) return <p>{error}</p>
 
     return (
         <>
-        <NavigationAdmin />
+        
         <div className="product-container">
                 <h2>Lägg till produkt</h2>
                 <form onSubmit={handleSubmit}>
@@ -92,9 +96,11 @@ export const CreateProduct = () => {
                         <option value="Övriga leksaker">Övriga leksaker</option>
                         </select>
                         <button>Lägg till produkt</button>
-
                 </form>
+                <br></br>
+                <button onClick={handleClick}>Avbryt</button>
             </div>
+            <NavigationAdmin />
         </>
     )
 }

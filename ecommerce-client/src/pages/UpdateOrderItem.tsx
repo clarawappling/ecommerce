@@ -35,7 +35,6 @@ export const UpdateOrderItem = () => {
 
     return (
         <>
-        <NavigationAdmin />
         <div className="update-order-item-container">
             <h3>{productName}</h3>
             <form onSubmit={handleSubmit}>
@@ -50,7 +49,7 @@ export const UpdateOrderItem = () => {
             <button onClick={(e) => {handleClick(e)}}>Avbryt</button>
             </form>
         </div>
-    
+        <NavigationAdmin />
         </>
     )
 }

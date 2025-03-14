@@ -17,21 +17,23 @@ export const ManageProducts = () => {
         navigate("/admin/update-product/"+id);
     }
 
+    const handleCreate = () => {
+        navigate("/admin/create-product")
+    }
     if (isLoading) return <p>Loading..</p>
     if (error) return <p>{error}</p>
     return (
 <>
-        <NavigationAdmin />
         <div>
             <h2>Produktlista</h2>
+            <button onClick={handleCreate}>Lägg till produkt</button>
             <div className="product-list">
                 {
                     products.map((product) => (
                         <article className="product-item" key={product.id}>
                             <p>{product.name}</p>
-                            <p>{product.description}</p>
-                            <p>{product.price}</p>
-                            <p>{product.stock}</p>
+                            <p>{product.price} SEK</p>
+                            <p>{product.stock} st</p>
                             <button onClick={() => {deleteProductHandler(product.id)}}>Ta bort</button>
                             <button onClick={() => {handleClick(product.id)}}>Uppdatera produkt</button>
                     
@@ -40,8 +42,8 @@ export const ManageProducts = () => {
                     )
                 }
             </div>
-         
         </div>
+        <NavigationAdmin />
         </>
     )
 }
