@@ -7,15 +7,15 @@ export const NavigationAdmin = () => {
             <ul>
               
                 <li>
-                    <NavLink to={"/admin/products"}>Produktlista</NavLink>
+                    <NavLink to={"/admin/products"}>Produkter</NavLink>
                 </li>
 
                 <li>
-                    <NavLink to={"/admin/orders"}>Orderlista</NavLink>
+                    <NavLink to={"/admin/orders"}>Ordrar</NavLink>
                 </li>
 
                 <li>
-                    <NavLink to={"/admin/customers"}>Kundregister</NavLink>
+                    <NavLink to={"/admin/customers"}>Kunder</NavLink>
                 </li>
                 
             </ul>
