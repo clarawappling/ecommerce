@@ -15,12 +15,17 @@ useEffect(() => {
 const handleClick = (id: number) => {
     navigate("/admin/update-customer/"+id);
 }
+
+const handleCreate = () => {
+    navigate("/admin/create-customer")
+}
     return (
 
         <>
         <NavigationAdmin />
         <div>
             <h2>Kundregister</h2>
+            <button onClick={handleCreate}>Lägg till ny kund</button>
             <div className="customer-list">
                 {
                     customers.map((customer) => (
@@ -28,7 +33,6 @@ const handleClick = (id: number) => {
                             <p>{customer.firstname} {customer.lastname}</p>
                             <button onClick={() => {deleteCustomerHandler(customer.id)}}>Ta bort</button>
                             <button onClick={() => {handleClick(customer.id)}}>Uppdatera kundinformation</button>
-                    
                         </article>
                     )
                     )

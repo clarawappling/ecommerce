@@ -41,6 +41,10 @@ export const UpdateCustomer = () => {
         navigate("/admin/customers");
      }
            
+     const handleClick = () => {
+        navigate("/admin/customers");
+     }
+
     if(isLoading) return <p>Loading..</p>
      if(error) return <p>{error}</p>
 
@@ -114,10 +118,10 @@ export const UpdateCustomer = () => {
                     onChange={(e) => {handleChange(e)}}
                 />
                 <button>Uppdatera</button>
-                   
-              
-            
+               
             </form>
+            <br></br>
+            <button onClick={handleClick}>Avbryt</button>
         </div>
         </>
     )
