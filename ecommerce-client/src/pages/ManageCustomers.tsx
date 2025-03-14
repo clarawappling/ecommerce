@@ -17,12 +17,13 @@ const handleClick = (id: number) => {
 }
 
 const handleCreate = () => {
-    navigate("/admin/create-customer")
+    navigate("/admin/create-customer");
 }
-    return (
 
+if(isLoading) return <p>Loading..</p>
+    if(error) return <p>{error}</p>
+    return (
         <>
-        <NavigationAdmin />
         <div>
             <h2>Kundregister</h2>
             <button onClick={handleCreate}>Lägg till ny kund</button>
@@ -40,6 +41,7 @@ const handleCreate = () => {
             </div>
          
         </div>
+        <NavigationAdmin />
         </>
     )
 }

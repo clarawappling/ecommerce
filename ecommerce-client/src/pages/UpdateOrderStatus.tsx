@@ -47,7 +47,6 @@ export const UpdateOrderStatus = () => {
 
     return (
         <>
-        <NavigationAdmin />
         <div className="update-order-status-container">
             <h2>Uppdatera orderstatus</h2>
             <h4>{order?.customer_firstname} {order?.customer_lastname}, order-id: {order?.id}, Skapad: {order ? formatDate(order.created_at) : "" }</h4>
@@ -64,6 +63,7 @@ export const UpdateOrderStatus = () => {
             </form>
             
         </div>
+        <NavigationAdmin />
         </>
     )
 }

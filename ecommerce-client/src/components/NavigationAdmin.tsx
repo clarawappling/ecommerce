@@ -5,10 +5,6 @@ export const NavigationAdmin = () => {
     return (
         <nav id="admin-nav">
             <ul>
-                <li>
-                    <NavLink to={"/admin/create-product"}>Lägg till produkt</NavLink>
-                    {/* Flytta till produktsidan */}
-                </li>
               
                 <li>
                     <NavLink to={"/admin/products"}>Produktlista</NavLink>

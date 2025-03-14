@@ -17,13 +17,16 @@ export const ManageProducts = () => {
         navigate("/admin/update-product/"+id);
     }
 
+    const handleCreate = () => {
+        navigate("/admin/create-product")
+    }
     if (isLoading) return <p>Loading..</p>
     if (error) return <p>{error}</p>
     return (
 <>
-        <NavigationAdmin />
         <div>
             <h2>Produktlista</h2>
+            <button onClick={handleCreate}>Lägg till produkt</button>
             <div className="product-list">
                 {
                     products.map((product) => (
@@ -40,8 +43,8 @@ export const ManageProducts = () => {
                     )
                 }
             </div>
-         
         </div>
+        <NavigationAdmin />
         </>
     )
 }

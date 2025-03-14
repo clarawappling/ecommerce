@@ -30,7 +30,6 @@ export const OrderDetails = () => {
 
     return (
         <>
-        <NavigationAdmin />
         <h2>Detaljerad orderinformation</h2>
         <h3>Kundinformation</h3>
         <p>{order?.customer_firstname} {order?.customer_lastname}</p>
@@ -56,12 +55,7 @@ export const OrderDetails = () => {
             </div>
           )
         })}
-     
-        
-       
-        
-        
-    
+     <NavigationAdmin />
         </>
     )
 }

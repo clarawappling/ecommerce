@@ -50,7 +50,6 @@ export const UpdateCustomer = () => {
 
     return (
         <>
-        <NavigationAdmin />
         <div className="customer-container">
             <h2>Uppdatera kundinformation</h2>
             <form onSubmit={handleSubmit}>
@@ -123,6 +122,7 @@ export const UpdateCustomer = () => {
             <br></br>
             <button onClick={handleClick}>Avbryt</button>
         </div>
+        <NavigationAdmin />
         </>
     )
 }

@@ -25,7 +25,6 @@ export const ManageOrders = () => {
 
     return (
         <>
-            <NavigationAdmin />
             <div>
                 <h2>Orderlista</h2>
                 <div className="order-list">
@@ -43,6 +42,7 @@ export const ManageOrders = () => {
                     }
                 </div>
             </div>
+            <NavigationAdmin />
         </>
     )
 }
