@@ -18,7 +18,7 @@ export const OrderDetails = () => {
       if(!params.id) return;
       const idAsNumber = +params.id;
       fetchOrderByIdHandler(idAsNumber).then((data) => setOrder(data))
-    })
+    }, [])
 
 
     const handleClick = (id: number, quantity: number, product_name: string) => {
