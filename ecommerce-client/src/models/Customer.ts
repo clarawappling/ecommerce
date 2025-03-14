@@ -13,4 +13,4 @@ export type Customer = {
 }
 
 export type CustomerCreate = Omit <Customer, 'id' | 'created_at'>
-export type CustomerUpdate = Omit <Customer, 'id' | 'created at'>
+export type CustomerUpdate = Omit <Customer, 'id' | 'created_at'>

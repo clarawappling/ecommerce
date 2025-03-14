@@ -40,11 +40,11 @@ export const router = createBrowserRouter( [
                 element: <UpdateProduct />
              },
              {
-                path: "admin/orders",
+                path: "/admin/orders",
                 element: <ManageOrders />
              },
              {
-                path: "admin/update-order-status/:id",
+                path: "/admin/update-order-status/:id",
                 element: <UpdateOrderStatus />
              },
              {
@@ -61,7 +61,7 @@ export const router = createBrowserRouter( [
                element: <ManageCustomers />
              },
              {
-               path: "/update-customer/:id",
+               path: "/admin/update-customer/:id",
                element: <UpdateCustomer />
              }
              
