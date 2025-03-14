@@ -21,13 +21,13 @@ export const UpdateOrderItem = () => {
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        navigate("/admin/detailed-order/" + id);
+        navigate("/admin/orders");
     }
 
     const handleSubmit = async (e: FormEvent) =>  {
         e.preventDefault();
         await updateOrderItemHandler(id, {quantity: orderItem.quantity})
-        navigate("/admin/detailed-order/" + id)
+        navigate("/admin/orders")
     }
 
     if(isLoading) return <p>Loading..</p>
