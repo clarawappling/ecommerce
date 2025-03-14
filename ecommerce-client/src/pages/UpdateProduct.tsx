@@ -44,6 +44,9 @@ const handleSubmit = async (e:FormEvent) => {
     navigate("/admin/products")
 }
 
+const handleClick = () => {
+    navigate("/admin/products");
+ }
      if(isLoading) return <p>Loading..</p>
      if(error) return <p>{error}</p>
 
@@ -102,6 +105,8 @@ const handleSubmit = async (e:FormEvent) => {
                         <option value="Övriga leksaker">Övriga leksaker</option>
                         </select>
                         <button>Uppdatera</button>
+                        <br></br>
+                    <button onClick={handleClick}>Avbryt</button>
 
                 </form>
             </div>

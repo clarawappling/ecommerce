@@ -17,6 +17,10 @@ export const NavigationAdmin = () => {
                 <li>
                     <NavLink to={"/admin/orders"}>Orderlista</NavLink>
                 </li>
+
+                <li>
+                    <NavLink to={"/admin/customers"}>Kundregister</NavLink>
+                </li>
                 
             </ul>
         </nav>
