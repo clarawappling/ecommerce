@@ -13,6 +13,7 @@ import { UpdateOrderItem } from "./pages/UpdateOrderItem";
 import { ManageCustomers } from "./pages/ManageCustomers";
 import { UpdateCustomer } from "./pages/UpdateCustomer";
 import { CreateCustomer } from "./pages/CreateCustomer";
+import { ProductDetails } from "./pages/ProductDetails";
 
 export const router = createBrowserRouter( [
     {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter( [
                 path: "/products",
                 element: <ShowProducts />
             },
+            {
+               path: "/product/:id",
+               element: <ProductDetails />
+           },
             {
                 path: "/admin/products",
                 element: <ManageProducts />
