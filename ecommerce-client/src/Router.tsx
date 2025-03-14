@@ -5,7 +5,7 @@ import { Home } from "./pages/Home";
 import { ManageProducts } from "./pages/ManageProducts";
 import { CreateProduct } from "./pages/CreateProduct";
 import { UpdateProduct } from "./pages/UpdateProduct";
-import { Products } from "./pages/Products";
+import { ShowProducts } from "./pages/ShowProducts";
 import { ManageOrders } from "./pages/ManageOrders";
 import { UpdateOrderStatus } from "./pages/UpdateOrderStatus";
 import { OrderDetails } from "./pages/OrderDetails";
@@ -26,7 +26,7 @@ export const router = createBrowserRouter( [
             },
             {
                 path: "/products",
-                element: <Products />
+                element: <ShowProducts />
             },
             {
                 path: "/admin/products",
