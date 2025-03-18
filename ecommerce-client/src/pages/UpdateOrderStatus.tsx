@@ -63,7 +63,6 @@ export const UpdateOrderStatus = () => {
             </form>
             
         </div>
-        <NavigationAdmin />
         </>
     )
 }

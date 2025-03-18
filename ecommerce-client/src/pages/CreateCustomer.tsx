@@ -124,7 +124,6 @@ export const CreateCustomer = () => {
                 <br></br>
                 <button onClick={handleClick}>Avbryt</button>
             </div>
-            <NavigationAdmin />
             </>
         )
 }

@@ -43,7 +43,6 @@ export const ManageProducts = () => {
                 }
             </div>
         </div>
-        <NavigationAdmin />
         </>
     )
 }

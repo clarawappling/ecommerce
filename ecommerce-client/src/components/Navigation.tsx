@@ -12,10 +12,7 @@ export const Navigation = () => {
                     <NavLink to={"/products"}>Sortiment</NavLink>
                 </li>
                 <li>
-                    <NavLink to={"/admin/products"}>Admin</NavLink>
-                </li>
-                <li>
-                    <NavLink to={"/checkout"}>Varukorg</NavLink>
+                    <NavLink to={"/cart"}>Varukorg</NavLink>
                 </li>
                 
             </ul>
