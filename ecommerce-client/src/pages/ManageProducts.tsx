@@ -25,7 +25,7 @@ export const ManageProducts = () => {
     return (
 <>
         <div>
-            <h2>Produktlista</h2>
+            <h1>Produktlista</h1>
             <button onClick={handleCreate}>Lägg till produkt</button>
             <div className="product-list">
                 {

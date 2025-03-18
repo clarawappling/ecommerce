@@ -26,7 +26,7 @@ export const ManageOrders = () => {
     return (
         <>
             <div>
-                <h2>Orderlista</h2>
+                <h1>Orderlista</h1>
                 <div className="order-list">
                     {
                         orders.map((order) => (

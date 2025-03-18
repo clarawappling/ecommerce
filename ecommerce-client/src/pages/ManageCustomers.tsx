@@ -25,7 +25,7 @@ if(isLoading) return <p>Loading..</p>
     return (
         <>
         <div>
-            <h2>Kundregister</h2>
+            <h1>Kundregister</h1>
             <button onClick={handleCreate}>Lägg till ny kund</button>
             <div className="customer-list">
                 {
