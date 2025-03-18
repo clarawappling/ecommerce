@@ -12,7 +12,7 @@ export const ProductDetails = () => {
     const params = useParams();
     const [product, setProduct] = useState<Product | null>(null);
     const {fetchProductByIdHandler, error, isLoading} = useProduct();
-    const {cart, dispatch} = useContext(CartContext);
+    const {dispatch} = useContext(CartContext);
 
     useEffect(() => {
         if(!params.id) return;
@@ -26,6 +26,9 @@ export const ProductDetails = () => {
             payload: new CartItem(product, quantity)
         })
     }
+    
+    if(isLoading) return <p>Loading..</p>
+    if(error) return <p>{error}</p>
     
     return (
         <>

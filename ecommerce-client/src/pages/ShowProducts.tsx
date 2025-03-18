@@ -11,7 +11,7 @@ export const ShowProducts = () => {
    
    const {products, fetchProductsHandler, error, isLoading} = useProduct();
    const navigate = useNavigate();
-   const {cart, dispatch} = useContext(CartContext);
+   const {dispatch} = useContext(CartContext);
     
      useEffect (() => {
            fetchProductsHandler();

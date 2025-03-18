@@ -4,7 +4,7 @@
 }
 
 #product-image:hover {
-  
+    cursor:default;
     transform: scale(1.07);
 }
 
@@ -16,5 +16,9 @@
 
 #product-customer-item:hover {
    transform: none; 
-   cursor:default;
+  
+}
+
+.product-name {
+    cursor: default;
 }
