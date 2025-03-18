@@ -11,7 +11,7 @@ export const Layout = () => {
         <Outlet />
     </main>
 
-    <footer> <NavLink to={"/admin"}>Admin</NavLink> </footer>   
+    <footer> <NavLink to={"/admin"}>Adminläge</NavLink> </footer>   
     </>
 )
 }

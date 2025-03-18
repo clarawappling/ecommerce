@@ -10,7 +10,7 @@ return (
     <main>
         <Outlet />
     </main>        
-    <footer> <NavLink to={"/"}>Kundens vy</NavLink> </footer>    
+    <footer> <NavLink to={"/"}> &lt;&lt; Tillbaka till kundens vy</NavLink> </footer>    
     </>
 )
 }
