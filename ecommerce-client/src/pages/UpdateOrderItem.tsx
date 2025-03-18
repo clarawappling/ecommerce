@@ -2,7 +2,6 @@ import { FormEvent, useState } from "react"
 import { useNavigate, useParams } from "react-router"
 import { OrderItemUpdate } from "../models/OrderItem"
 import { useOrderItem } from "../hooks/useOrderItem"
-import { NavigationAdmin } from "../components/NavigationAdmin"
 
 export const UpdateOrderItem = () => {
     const params = useParams()

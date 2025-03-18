@@ -25,7 +25,7 @@ export const Cart = () => {
     const handleEmptyCart = () => {
         dispatch ({
             type: CartActionType.RESET_CART,
-            payload: {}
+            payload: null
         })
     }
 
