@@ -39,7 +39,6 @@
 
 .product-customer-item:hover {
     transform: scale(1.03);
-    cursor: pointer;
 }
 
 .product-image {
@@ -48,12 +47,14 @@
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 
 .product-name {
     margin: 10px 0;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .product-description {
