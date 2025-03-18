@@ -41,7 +41,6 @@ if(isLoading) return <p>Loading..</p>
             </div>
          
         </div>
-        <NavigationAdmin />
         </>
     )
 }

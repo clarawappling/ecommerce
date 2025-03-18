@@ -49,7 +49,6 @@ export const UpdateOrderItem = () => {
             <button onClick={(e) => {handleClick(e)}}>Avbryt</button>
             </form>
         </div>
-        <NavigationAdmin />
         </>
     )
 }

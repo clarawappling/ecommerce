@@ -55,7 +55,6 @@ export const OrderDetails = () => {
             </div>
           )
         })}
-     <NavigationAdmin />
         </>
     )
 }

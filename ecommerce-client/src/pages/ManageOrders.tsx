@@ -41,7 +41,6 @@ export const ManageOrders = () => {
                     }
                 </div>
             </div>
-            <NavigationAdmin />
         </>
     )
 }

@@ -1,4 +1,4 @@
-import { Outlet } from "react-router"
+import { NavLink, Outlet } from "react-router"
 import { Navigation } from "../components/Navigation"
 
 export const Layout = () => {
@@ -11,7 +11,7 @@ export const Layout = () => {
         <Outlet />
     </main>
 
-    {/* <footer><p>Footer</p></footer> */}
+    <footer> <NavLink to={"/admin"}>Adminläge</NavLink> </footer>   
     </>
 )
 }

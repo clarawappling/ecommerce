@@ -100,7 +100,6 @@ export const CreateProduct = () => {
                 <br></br>
                 <button onClick={handleClick}>Avbryt</button>
             </div>
-            <NavigationAdmin />
         </>
     )
 }
