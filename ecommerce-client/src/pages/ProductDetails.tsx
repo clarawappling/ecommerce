@@ -1,20 +1,31 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router"
 import { Product } from "../models/Product";
 import { useProduct } from "../hooks/useProduct";
 import "../styles/ShowProducts.css"
 import "../styles/ProductDetails.css"
+import CartContext from "../contexts/CartContext";
+import { CartActionType } from "../reducers/CartReducer";
+import { CartItem } from "../models/CartItem";
 
 export const ProductDetails = () => {
     const params = useParams();
     const [product, setProduct] = useState<Product | null>(null);
     const {fetchProductByIdHandler, error, isLoading} = useProduct();
+    const {cart, dispatch} = useContext(CartContext);
 
     useEffect(() => {
         if(!params.id) return;
         const idAsNumber = +params.id
         fetchProductByIdHandler(idAsNumber).then((data) => setProduct(data));
     }, [])
+
+    const handleAddToCart = (product: Product, quantity: number) => {
+        dispatch({
+            type: CartActionType.ADD_ITEM,
+            payload: new CartItem(product, quantity)
+        })
+    }
     
     return (
         <>
@@ -25,7 +36,12 @@ export const ProductDetails = () => {
                             <p className="product-description">{product?.description}</p>
                             <i>Kategori: {product?.category}</i>
                             <p>Lagersaldo: {product?.stock}</p>
-                            <button>Lägg i varukorg</button>
+                            <button 
+                            onClick={() => { if (product) {handleAddToCart(product, 1)}}}
+                            disabled={!product}>
+                            Lägg i varukorg
+                            </button>
+
                             
                         </div>
         </>
