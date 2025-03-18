@@ -1,4 +1,4 @@
-import { createContext, Dispatch, PropsWithChildren, useReducer } from 'react'
+import { createContext, Dispatch, PropsWithChildren, useEffect, useReducer } from 'react'
 import { CartReducer, ICartAction } from '../reducers/CartReducer';
 import { CartItem } from '../models/CartItem';
 
@@ -12,8 +12,15 @@ const CartContext = createContext<ICartContext>({cart: [], dispatch: () => null}
 
 
 export const CartProvider = ({children}: PropsWithChildren) => {
-  const [cart, dispatch] = useReducer(CartReducer, []);
+  const [cart, dispatch] = useReducer(CartReducer, [], () => {
+    const cachedCart = localStorage.getItem('cart')
+    return cachedCart ? JSON.parse(cachedCart) : []
+  });
 
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
+  
   return (
     <CartContext.Provider value={{cart, dispatch}}>
       {children} 

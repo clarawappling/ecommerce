@@ -1,11 +1,11 @@
 import { useContext } from "react"
 import CartContext from "../contexts/CartContext"
 import { CartActionType } from "../reducers/CartReducer"
-import "../styles/Checkout.css"
+import "../styles/Cart.css"
 import { Product } from "../models/Product"
 import { CartItem } from "../models/CartItem"
 
-export const Checkout = () => {
+export const Cart = () => {
 
     const {cart, dispatch} = useContext(CartContext)
 
@@ -38,10 +38,10 @@ export const Checkout = () => {
     <>
    
     <div className="cart-container">
-    <h1>Checkout</h1>
+    <h1>Varukorg</h1>
     <ul className="cart-list">
     {cart.map((item) => (
-       <>
+       
        <li key={item.product.id}>
         <div className="cart-item">
             <h3>{item.product.name}</h3>
@@ -59,13 +59,14 @@ export const Checkout = () => {
                 <button onClick={() => handleRemoveFromCart (item)}>Ta bort</button>
         </div>
         </li>
-            </>
+            
         
     ))}
     </ul>
     <div className="total-sum-container">
-        <p>{totalPrice ? "Att betala: " + totalPrice : "Du har inga varor i din varukorg. Och vet du? Det är inte så dumt. Get out while you still can."}</p>
+        <p>{totalPrice ? "Att betala: " + totalPrice + " SEK" :  "Du har inga varor i din varukorg. Och vet du? Det är inte så dumt. Get out while you still can."}</p>
     </div>
+    <button className="happy-btn">Till kassan</button>
     </div>
     <button className="alert-btn"onClick={handleEmptyCart}>Töm varukorg</button>
     </>

@@ -32,3 +32,14 @@
 .alert-btn {
     background-color: rgb(253, 140, 140);
 }
+
+.happy-btn {
+    background-color: rgb(184, 221, 221);
+    margin: 2rem;
+    padding: 1.5rem;
+}
+
+.total-sum-container {
+    font-size: x-large;
+    
+}
