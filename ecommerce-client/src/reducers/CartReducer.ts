@@ -28,14 +28,14 @@ export const CartReducer = (cart: CartItem[], action: ICartAction) => {
         
         }
         case CartActionType.REMOVE_ITEM: {
-            
+            return;  
         }
         case CartActionType.CHANGE_QUANTITY:
         {
-           
+            return;
         }
         case CartActionType.RESET_CART: {
-            
+            return;
         }
         default: {
             return cart;
