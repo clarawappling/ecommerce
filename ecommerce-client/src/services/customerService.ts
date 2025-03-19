@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Customer, CustomerCreate, CustomerUpdate } from "../models/Customer";
+import { CustomerCreateResponse } from "../models/CustomerCreateReponse";
 
 
 const CUSTOMERS_URL = "http://localhost:3000/customers"
@@ -28,9 +29,10 @@ export const getCustomerById = async (id: number): Promise<Customer> => {
 
 
 // CREATE CUSTOMER
-export const createCustomer = async (payload: CustomerCreate) => {
+export const createCustomer = async (payload: CustomerCreate): Promise<CustomerCreateResponse> => {
     try {
-        await axios.post(CUSTOMERS_URL, payload);
+        const response = await axios.post(CUSTOMERS_URL, payload);
+        return response.data;
     } catch(error) {
         console.log(error);
         throw error;
