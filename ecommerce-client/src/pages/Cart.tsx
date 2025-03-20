@@ -5,6 +5,14 @@ import "../styles/Cart.css"
 import { Product } from "../models/Product"
 import { CartItem } from "../models/CartItem"
 
+import * as React from 'react';
+import {loadStripe} from '@stripe/stripe-js';
+import {
+  EmbeddedCheckoutProvider,
+  EmbeddedCheckout
+} from '@stripe/react-stripe-js';
+
+const stripePromise = loadStripe('pk_test_51R4JflEUcfJR78A9I4729RJfcSNRKqB9njUYAcAAmJTLHAsbn8xWDNaakNUUyvbP2dHDE0UisUraA1GgHnwmmg1F00aCscjeAl')
 export const Cart = () => {
 
     const {cart, dispatch} = useContext(CartContext)
@@ -33,6 +41,17 @@ export const Cart = () => {
         total + (item.quantity * item.product.price )
     ), 0 )
 
+
+    const fetchClientSecret = React.useCallback(() => {
+        // Create a Checkout Session
+        return fetch("http://localhost:3000/stripe/create-checkout-session-embedded", {
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((data) => data.clientSecret);
+      }, []);
+    
+      const options = {fetchClientSecret};
 
     return (
     <>
@@ -69,6 +88,14 @@ export const Cart = () => {
     <button className="happy-btn">Till kassan</button>
     </div>
     <button className="alert-btn"onClick={handleEmptyCart}>Töm varukorg</button>
+<div id="stripe-container">
+    <EmbeddedCheckoutProvider
+        stripe={stripePromise}
+        options={options}
+      >
+        <EmbeddedCheckout />
+      </EmbeddedCheckoutProvider>
+      </div>
     </>
 )
 }
