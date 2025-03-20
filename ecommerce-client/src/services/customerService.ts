@@ -27,6 +27,18 @@ export const getCustomerById = async (id: number): Promise<Customer> => {
     }
 }
 
+// GET CUSTOMER BY EMAIL
+export const getCustomerByEmail = async (email: string): Promise<Customer> => {
+    try {
+        const response = axios.get(`${CUSTOMERS_URL}/${email}`);
+        return (await response).data;
+    }
+    catch(error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 
 // CREATE CUSTOMER
 export const createCustomer = async (payload: CustomerCreate): Promise<CustomerCreateResponse> => {
