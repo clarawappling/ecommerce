@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { DetailedOrder, Order, OrderStatusUpdate } from "../models/Order"
-import { deleteOrder, fetchOrderById, fetchOrders, updateOrderStatus } from "../services/orderService";
+import { deleteOrder, fetchOrderById, fetchOrderByPaymentId, fetchOrders, updateOrderStatus } from "../services/orderService";
 
 export const useOrder = () => {
 
@@ -25,7 +25,7 @@ const fetchOrdersHandler = async () => {
     }
 }
 
-// GET ORDER BY ID
+// GET ORDER BY ORDER ID
 
 const fetchOrderByIdHandler = async (id: number) => {
     setIsLoading(true);
@@ -34,13 +34,28 @@ const fetchOrderByIdHandler = async (id: number) => {
         const data: DetailedOrder = await fetchOrderById(id);
         return data;
     } catch (error) {
-        setError("Couldn't get order");
+        setError("Couldn't get order by order id");
         throw error;
     } finally {
         setIsLoading(false);
     }
 }
 
+// GET ORDER BY PAYMENT ID
+
+const fetchOrderByPaymentIdHandler = async (paymentId: number) => {
+    setIsLoading(true);
+    
+    try {
+        const data: DetailedOrder = await fetchOrderByPaymentId(paymentId);
+        return data;
+    } catch (error) {
+        setError("Couldn't get order by payment id");
+        throw error;
+    } finally {
+        setIsLoading(false);
+    }
+}
 // DELETE ORDER
 
 const deleteOrderHandler = async (id: number) => {
@@ -78,6 +93,7 @@ return {
     fetchOrdersHandler,
     deleteOrderHandler,
     updateOrderStatusHandler,
-    fetchOrderByIdHandler
+    fetchOrderByIdHandler,
+    fetchOrderByPaymentIdHandler
 }
 }

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Customer, CustomerCreate, CustomerUpdate } from "../models/Customer"
-import { createCustomer, deleteCustomer, getAllCustomers, getCustomerById, updateCustomer } from "../services/customerService";
+import { createCustomer, deleteCustomer, getAllCustomers, getCustomerByEmail, getCustomerById, updateCustomer } from "../services/customerService";
 
 export const useCustomer = () => {
     const [customers, setCustomers] = useState<Customer[]>([]);
@@ -20,11 +20,25 @@ export const useCustomer = () => {
         }
     }
 
-    // GET SPECIFIC CUSTOMER
+    // GET CUSTOMER BY ID
     const getCustomerByIdHandler = async (id: number) => {
         setIsLoading(true)
         try {
             return await getCustomerById(id);
+        } catch (error) {
+            setError("Error getting customer")
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    
+    // GET CUSTOMER BY EMAIL
+    const getCustomerByEmailHandler = async (email: string) => {
+        setIsLoading(true)
+        try {
+            return await getCustomerByEmail(email);
         } catch (error) {
             setError("Error getting customer")
             throw error;
@@ -80,6 +94,7 @@ export const useCustomer = () => {
     return {
         getAllCustomersHandler,
         getCustomerByIdHandler,
+        getCustomerByEmailHandler,
         createCustomerHandler,
         updateCustomerHandler,
         deleteCustomerHandler,
