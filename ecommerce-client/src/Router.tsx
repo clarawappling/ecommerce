@@ -14,8 +14,9 @@ import { ManageCustomers } from "./pages/ManageCustomers";
 import { UpdateCustomer } from "./pages/UpdateCustomer";
 import { CreateCustomer } from "./pages/CreateCustomer";
 import { ProductDetails } from "./pages/ProductDetails";
-import { Cart } from "./pages/Cart";
 import { AdminLayout } from "./pages/AdminLayout";
+import { CartPage } from "./pages/CartPage";
+import { Checkout } from "./pages/Checkout";
 
 export const router = createBrowserRouter( [
     {
@@ -36,9 +37,15 @@ export const router = createBrowserRouter( [
                element: <ProductDetails />
            },
            {
-            path: "/cart",
-            element: <Cart />
-           } ] },
+            path: "/cart-page",
+            element: <CartPage />
+           },
+           {
+            path: "/checkout",
+            element: <Checkout />
+           }
+         
+         ] },
             {
                 path: "/admin",
                 element: <AdminLayout />,
