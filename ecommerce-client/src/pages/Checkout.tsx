@@ -6,24 +6,23 @@ import {
   EmbeddedCheckout
 } from '@stripe/react-stripe-js';
 import CartContext from "../contexts/CartContext";
+import { CreateCustomer } from "./CreateCustomer";
 
 const stripePromise = loadStripe('pk_test_51R4JflEUcfJR78A9I4729RJfcSNRKqB9njUYAcAAmJTLHAsbn8xWDNaakNUUyvbP2dHDE0UisUraA1GgHnwmmg1F00aCscjeAl')
 
 export const Checkout = () => {
 
     const {cart} = React.useContext(CartContext)
-    
-    
+
     const fetchClientSecret = React.useCallback(() => {
-    
         return fetch("http://localhost:3000/stripe/create-checkout-session-embedded", {
           method: "POST",
         })
           .then((res) => res.json())
           .then((data) => data.clientSecret);
       }, []);
+    const options = {fetchClientSecret};
     
-      const options = {fetchClientSecret};
     
     return (
         <>
@@ -32,6 +31,8 @@ export const Checkout = () => {
         <Cart/>
 {
   cart.length > 0 && (
+<>
+    <CreateCustomer />
   <div id="stripe-container">
   <EmbeddedCheckoutProvider
       stripe={stripePromise}
@@ -40,7 +41,7 @@ export const Checkout = () => {
       <EmbeddedCheckout />
     </EmbeddedCheckoutProvider>
     </div>
-
+</>
 )}
       
         </>

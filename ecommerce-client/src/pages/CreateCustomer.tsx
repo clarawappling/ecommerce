@@ -1,8 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react"
 import { CustomerCreate } from "../models/Customer"
 import { useCustomer } from "../hooks/useCustomer"
-import { useNavigate } from "react-router"
-import { NavigationAdmin } from "../components/NavigationAdmin"
+import { useLocation, useNavigate } from "react-router"
 
 export const CreateCustomer = () => {
     
@@ -10,8 +9,7 @@ export const CreateCustomer = () => {
         firstname: "", 
         lastname: "", 
         phone: "", 
-        email: "", 
-        password: "", 
+        email: "",  
         postal_code: "", 
         country: "", 
         city: "", 
@@ -19,6 +17,7 @@ export const CreateCustomer = () => {
 
     const {error, isLoading, createCustomerHandler} = useCustomer();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleChange= (e: ChangeEvent<HTMLInputElement>) => {
         if(!customer) return;
@@ -26,7 +25,12 @@ export const CreateCustomer = () => {
         setCustomer({...customer, [name]: value})
     }
     const handleClick = ()=> {
-        navigate("/admin/customers")
+        if (location.pathname === "/admin/create-customer") {
+            navigate("/admin/customers");
+         }
+         if (location.pathname === "/checkout") {
+            navigate("/cart-page");
+         }
      }
 
        const handleSubmit = async (e: FormEvent) => {
@@ -37,13 +41,17 @@ export const CreateCustomer = () => {
                  lastname: customer.lastname,
                  email: customer.email,
                  phone: customer.phone,
-                 password: customer.password,
                  street_address: customer.street_address,
                  postal_code: customer.postal_code,
                  city: customer.city,
                  country: customer.country,
              });
-             navigate("/admin/customers");
+             if (location.pathname === "/admin/create-customer") {
+                navigate("/admin/customers");
+             }
+             if (location.pathname === "/checkout") {
+                navigate("/cart-page");
+             }
           }
 
           
@@ -83,13 +91,7 @@ export const CreateCustomer = () => {
                         value={customer?.phone ?? ''}
                         onChange={(e) => {handleChange(e)}}
                     />
-                       <label htmlFor="password">Lösenord: </label>
-                    <input
-                        name="password"
-                        id="password"
-                        value={customer?.password ?? ''}
-                        onChange={(e) => {handleChange(e)}}
-                    />
+                
                        <label htmlFor="street_address">Gatuadress: </label>
                     <input
                         name="street_address"
@@ -118,10 +120,11 @@ export const CreateCustomer = () => {
                         value={customer?.country ?? ''}
                         onChange={(e) => {handleChange(e)}}
                     />
-                    <button>Spara ny kund</button>
+                    <button>Spara kundinformation</button>
                    
                 </form>
                 <br></br>
+                
                 <button onClick={handleClick}>Avbryt</button>
             </div>
             </>
