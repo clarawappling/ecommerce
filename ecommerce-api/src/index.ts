@@ -21,11 +21,15 @@ app.post('/stripe/create-checkout-session-embedded', async (req: Request, res: R
           currency: 'sek',
           product_data: {
             name: 'UV-penna',
+            // Dynamiskt namn
             images: ['https://img.joomcdn.net/7ee972db7338d050cc20d8ed0a9fdc71281c4119_original.jpeg']
+            // Dynamisk bildlänk
           },
           unit_amount: 169 * 100,
+          // unit_amount= Dynamiskt item-price * 100
         },
         quantity: 4,
+        // Dynamisk kvantitet
       },
       {
         price_data: {
