@@ -12,7 +12,11 @@ app.use(cors())
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
+// TEST
+const itemName = 'UV-penna 2'
+const itemPrice = 169
 
+// Dra ut parametrarna m h a req.body deconstructuring och lägg in på relevanta platser. Allt som behövs finns i den ordern som kommer skapas i klienten.
 app.post('/stripe/create-checkout-session-embedded', async (req: Request, res: Response) => {
   const session = await stripe.checkout.sessions.create({
     line_items: [
@@ -21,11 +25,13 @@ app.post('/stripe/create-checkout-session-embedded', async (req: Request, res: R
           currency: 'sek',
           product_data: {
             name: 'UV-penna',
+            // name: "itemName",
             // Dynamiskt namn
             images: ['https://img.joomcdn.net/7ee972db7338d050cc20d8ed0a9fdc71281c4119_original.jpeg']
             // Dynamisk bildlänk
           },
           unit_amount: 169 * 100,
+          // unit_amount: itemPrice * 100,
           // unit_amount= Dynamiskt item-price * 100
         },
         quantity: 4,
@@ -50,8 +56,8 @@ app.post('/stripe/create-checkout-session-embedded', async (req: Request, res: R
     // Client ref id = dynamiskt order-id
   });
 
-  // res.json(session)
-  res.send({clientSecret: session.client_secret});
+  res.json(session)
+  // res.send({clientSecret: session.client_secret});
 });
 
 // Routes
