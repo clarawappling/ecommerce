@@ -56,8 +56,8 @@ app.post('/stripe/create-checkout-session-embedded', async (req: Request, res: R
     // Client ref id = dynamiskt order-id
   });
 
-  res.json(session)
-  // res.send({clientSecret: session.client_secret});
+  // res.json(session)
+  res.send({clientSecret: session.client_secret});
 });
 
 // Routes

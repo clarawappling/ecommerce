@@ -5,17 +5,11 @@ import "../styles/Cart.css"
 import { Product } from "../models/Product"
 import { CartItem } from "../models/CartItem"
 
-import * as React from 'react';
-import {loadStripe} from '@stripe/stripe-js';
-import {
-  EmbeddedCheckoutProvider,
-  EmbeddedCheckout
-} from '@stripe/react-stripe-js';
 
-const stripePromise = loadStripe('pk_test_51R4JflEUcfJR78A9I4729RJfcSNRKqB9njUYAcAAmJTLHAsbn8xWDNaakNUUyvbP2dHDE0UisUraA1GgHnwmmg1F00aCscjeAl')
+
 export const Cart = () => {
 
-    const {cart, dispatch} = useContext(CartContext)
+    const {cart, dispatch} = useContext(CartContext);
 
     const handleChangeQuantity = (product: Product, quantity: number) => {
         dispatch({
@@ -30,34 +24,21 @@ export const Cart = () => {
             })
         }
     
-    const handleEmptyCart = () => {
-        dispatch ({
-            type: CartActionType.RESET_CART,
-            payload: null
-        })
-    }
+    // const handleEmptyCart = () => {
+    //     dispatch ({
+    //         type: CartActionType.RESET_CART,
+    //         payload: null
+    //     })
+    // }
 
     const totalPrice = cart.reduce( (total, item: CartItem) => (
         total + (item.quantity * item.product.price )
     ), 0 )
 
-
-    const fetchClientSecret = React.useCallback(() => {
-        // Create a Checkout Session
-        return fetch("http://localhost:3000/stripe/create-checkout-session-embedded", {
-          method: "POST",
-        })
-          .then((res) => res.json())
-          .then((data) => data.clientSecret);
-      }, []);
-    
-      const options = {fetchClientSecret};
-
     return (
     <>
    
     <div className="cart-container">
-    <h1>Varukorg</h1>
     <ul className="cart-list">
     {cart.map((item) => (
        
@@ -77,25 +58,17 @@ export const Cart = () => {
             </div>
                 <button onClick={() => handleRemoveFromCart (item)}>Ta bort</button>
         </div>
-        </li>
-            
+        </li>     
         
     ))}
     </ul>
     <div className="total-sum-container">
-        <p>{totalPrice ? "Att betala: " + totalPrice + " SEK" :  "Du har inga varor i din varukorg. Och vet du? Det är inte så dumt. Get out while you still can."}</p>
+        <p>{totalPrice ? "Att betala: " + totalPrice + " SEK" :  "Du har inga varor i din varukorg. Och vet du? Det är inte så dumt."}</p>
     </div>
-    <button className="happy-btn">Till kassan</button>
+    
     </div>
-    <button className="alert-btn"onClick={handleEmptyCart}>Töm varukorg</button>
-<div id="stripe-container">
-    <EmbeddedCheckoutProvider
-        stripe={stripePromise}
-        options={options}
-      >
-        <EmbeddedCheckout />
-      </EmbeddedCheckoutProvider>
-      </div>
+    {/* <button className="alert-btn"onClick={handleEmptyCart}>Töm varukorg</button> */}
+
     </>
 )
 }
