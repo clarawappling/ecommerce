@@ -15,7 +15,7 @@ import { DetailedOrder, Order, OrderStatusUpdate } from "../models/Order";
         }
     }
 
-    // GET ORDER BY ID
+    // GET ORDER BY ORDER ID
 
     export const fetchOrderById = async (id: number): Promise <DetailedOrder> => {
         try {
@@ -26,6 +26,18 @@ import { DetailedOrder, Order, OrderStatusUpdate } from "../models/Order";
             throw error;
         }
     }
+
+        // GET ORDER BY PAYMENT ID
+
+        export const fetchOrderByPaymentId = async (paymentId: number): Promise <DetailedOrder> => {
+            try {
+                const response = await axios.get(`${ORDERS_URL}/${paymentId}`);
+                return response.data;
+            } catch(error) {
+                console.log(error)
+                throw error;
+            }
+        }
 
     // DELETE ORDER
     export const deleteOrder = async (id: number) => {
