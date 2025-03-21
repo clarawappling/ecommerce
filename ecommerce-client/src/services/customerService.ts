@@ -30,7 +30,7 @@ export const getCustomerById = async (id: number): Promise<Customer> => {
 // GET CUSTOMER BY EMAIL
 export const getCustomerByEmail = async (email: string): Promise<Customer> => {
     try {
-        const response = axios.get(`${CUSTOMERS_URL}/${email}`);
+        const response = axios.get(`${CUSTOMERS_URL}/email/${email}`);
         return (await response).data;
     }
     catch(error) {

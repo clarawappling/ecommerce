@@ -7,12 +7,16 @@ import {
 } from '@stripe/react-stripe-js';
 import CartContext from "../contexts/CartContext";
 import { CustomerCreate } from "../models/Customer";
+import { getCustomerByEmail } from "../services/customerService";
+import { useCustomer } from "../hooks/useCustomer";
+
 
 const stripePromise = loadStripe('pk_test_51R4JflEUcfJR78A9I4729RJfcSNRKqB9njUYAcAAmJTLHAsbn8xWDNaakNUUyvbP2dHDE0UisUraA1GgHnwmmg1F00aCscjeAl')
 
 export const Checkout = () => {
 
   const {cart} = React.useContext(CartContext)
+  const {getCustomerByEmailHandler, createCustomerHandler} = useCustomer();
 
 // Initialize customer state with localStorage if appliable
   const [customer, setCustomer] = React.useState<CustomerCreate>(() => {
@@ -57,6 +61,21 @@ export const Checkout = () => {
         }
 
 
+
+const handleClick = async () => {
+  console.log(customer.email)
+  
+  try {
+const response = await getCustomerByEmailHandler(customer.email);
+const customerId = response.id;
+console.log("Existing Customer ID:", customerId);
+
+  } catch {
+    const response = await createCustomerHandler(customer)
+    const customerId = response.id;
+    console.log("New Customer ID:", customerId);
+  } 
+}
 
 
 
@@ -143,10 +162,9 @@ export const Checkout = () => {
             </div>
 
             { customerIsCreated === true && (
-              <button className="happy-btn">Betala</button>
+              <button onClick={() => {handleClick(customer?.email)}} className="happy-btn">Betala</button>
               )}
-{/* 
-            { orderIsCreated === true && (
+             { customerIsCreated === true && (
             
   <div id="stripe-container">
   <EmbeddedCheckoutProvider
@@ -155,7 +173,7 @@ export const Checkout = () => {
     >
       <EmbeddedCheckout />
     </EmbeddedCheckoutProvider>
-    </div> )} */}
+    </div> )}
 </>
 )}
       
