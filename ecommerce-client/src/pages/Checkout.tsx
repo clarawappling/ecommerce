@@ -18,7 +18,7 @@ export const Checkout = () => {
 
   const {cart} = React.useContext(CartContext)
   const {getCustomerByEmailHandler, createCustomerHandler} = useCustomer();
-  const {createOrderHandler} = useOrder();
+  const {createOrderHandler, createStripeOrderHandler} = useOrder();
 
 // Initialize customer state with localStorage if appliable
   const [customer, setCustomer] = React.useState<CustomerCreate>(() => {
@@ -45,7 +45,7 @@ export const Checkout = () => {
           .then((data) => data.clientSecret);
       }, []);
     const options = {fetchClientSecret};
-    
+
 
 // Handle customer form changes
      const handleChange= (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,8 +88,13 @@ const handleClick = async () => {
  
       })
     };
-const orderResponse = await createOrderHandler(order);
-console.log(orderResponse)
+const orderIdResponse = await createOrderHandler(order);
+console.log(orderIdResponse)
+
+// Kalla på stripe-order-handler. Skicka ett objekt med items + orderid.
+
+const stripeResponse = await createStripeOrderHandler ({order_items: order.order_items, order_id: orderIdResponse})
+console.log(stripeResponse)
 
 } catch {
     const response = await createCustomerHandler(customer)
