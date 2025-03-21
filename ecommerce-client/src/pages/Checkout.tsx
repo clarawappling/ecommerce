@@ -70,10 +70,12 @@ const response = await getCustomerByEmailHandler(customer.email);
 const customerId = response.id;
 console.log("Existing Customer ID:", customerId);
 
+
   } catch {
     const response = await createCustomerHandler(customer)
     const customerId = response.id;
     console.log("New Customer ID:", customerId);
+    
   } 
 }
 
