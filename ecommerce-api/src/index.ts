@@ -17,7 +17,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 app.post('/stripe/create-checkout-session-embedded', async (req: Request, res: Response) => {
   const {order_id, order_items}: IStripeOrder = req.body;
   const session = await stripe.checkout.sessions.create({
-    line_items: order_items.map((item) => {
+    line_items: 
+    order_items.map((item) => {
       return (
         {
           price_data: {
@@ -27,7 +28,7 @@ app.post('/stripe/create-checkout-session-embedded', async (req: Request, res: R
             },
             unit_amount: item.unit_price * 100,
           },
-          quantity: item.quantity
+          quantity: item.quantity 
         }
       )
     }),
