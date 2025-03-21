@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { DetailedOrder, Order, OrderStatusUpdate } from "../models/Order"
-import { deleteOrder, fetchOrderById, fetchOrderByPaymentId, fetchOrders, updateOrderStatus } from "../services/orderService";
+import { DetailedOrder, Order, OrderCreate, OrderStatusUpdate } from "../models/Order"
+import { createOrder, deleteOrder, fetchOrderById, fetchOrderByPaymentId, fetchOrders, updateOrderStatus } from "../services/orderService";
 
 export const useOrder = () => {
 
@@ -56,6 +56,21 @@ const fetchOrderByPaymentIdHandler = async (paymentId: number) => {
         setIsLoading(false);
     }
 }
+
+// CREATE NEW ORDER
+
+const createOrderHandler = async (payload: OrderCreate) => {
+    setIsLoading(true)
+    try {
+        const response = await createOrder(payload);
+        return response.id;
+    } catch (error) {
+        setError("Error creating an order");
+        throw error;
+    } finally {
+        setIsLoading(false);
+    }
+}
 // DELETE ORDER
 
 const deleteOrderHandler = async (id: number) => {
@@ -73,6 +88,8 @@ const deleteOrderHandler = async (id: number) => {
 
 
 // UPDATE ORDER STATUS
+// Addera fler parametrar att uppdatera (payment id och payment status, uppdatera även modell och admin.
+// Alt. gör en ny tjänst som uppdaterar alla tre istället för bara status)
 
 const updateOrderStatusHandler = async (id: number, payload: OrderStatusUpdate) => {
     setIsLoading(true);
@@ -94,6 +111,7 @@ return {
     deleteOrderHandler,
     updateOrderStatusHandler,
     fetchOrderByIdHandler,
-    fetchOrderByPaymentIdHandler
+    fetchOrderByPaymentIdHandler,
+    createOrderHandler
 }
 }
