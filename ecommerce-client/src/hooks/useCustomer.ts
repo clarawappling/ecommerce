@@ -53,7 +53,7 @@ export const useCustomer = () => {
 
         try {
             const response = await createCustomer(payload);
-            console.log(response);
+            return response;
         } catch (error) {
             setError("Error creating a new customer")
             throw error;

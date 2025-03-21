@@ -7,12 +7,18 @@ import {
 } from '@stripe/react-stripe-js';
 import CartContext from "../contexts/CartContext";
 import { CustomerCreate } from "../models/Customer";
+import { useCustomer } from "../hooks/useCustomer";
+import { OrderCreate } from "../models/Order";
+import { useOrder } from "../hooks/useOrder";
+
 
 const stripePromise = loadStripe('pk_test_51R4JflEUcfJR78A9I4729RJfcSNRKqB9njUYAcAAmJTLHAsbn8xWDNaakNUUyvbP2dHDE0UisUraA1GgHnwmmg1F00aCscjeAl')
 
 export const Checkout = () => {
 
   const {cart} = React.useContext(CartContext)
+  const {getCustomerByEmailHandler, createCustomerHandler} = useCustomer();
+  const {createOrderHandler} = useOrder();
 
 // Initialize customer state with localStorage if appliable
   const [customer, setCustomer] = React.useState<CustomerCreate>(() => {
@@ -58,9 +64,60 @@ export const Checkout = () => {
 
 
 
+const handleClick = async () => {
+  console.log(customer.email)
+  
+  try {
+    const response = await getCustomerByEmailHandler(customer.email);
+    const customerId = response.id;
+    console.log("Existing Customer ID:", customerId);
 
+    const order: OrderCreate = {
+      customer_id: customerId,
+      payment_status: "Unpaid",
+      payment_id: "",
+      order_status: "Pending",
+      order_items: cart.map((item) => {
+        return (
+          {product_id: item.product.id,
+            product_name: item.product.name,
+            quantity: item.quantity,
+            unit_price: item.product.price
+          }
+        )
+ 
+      })
+    };
+const orderResponse = await createOrderHandler(order);
+console.log(orderResponse)
 
-    return (
+} catch {
+    const response = await createCustomerHandler(customer)
+    const customerId = response.id;
+    console.log("New Customer ID:", customerId);
+
+    const order: OrderCreate = {
+      customer_id: customerId,
+      payment_status: "Unpaid",
+      payment_id: "",
+      order_status: "Pending",
+      order_items: cart.map((item) => {
+        return (
+          {product_id: item.product.id,
+            product_name: item.product.name,
+            quantity: item.quantity,
+            unit_price: item.product.price
+           }
+        )
+      })
+    };
+    const orderResponse = await createOrderHandler(order);
+    console.log(orderResponse)
+    
+  } 
+}
+
+return (
         <>
         <h1>Checkout</h1>
         <h2>Varukorg</h2>
@@ -143,10 +200,9 @@ export const Checkout = () => {
             </div>
 
             { customerIsCreated === true && (
-              <button className="happy-btn">Betala</button>
+              <button onClick={handleClick} className="happy-btn">Betala</button>
               )}
-{/* 
-            { orderIsCreated === true && (
+             { customerIsCreated === true && (
             
   <div id="stripe-container">
   <EmbeddedCheckoutProvider
@@ -155,7 +211,7 @@ export const Checkout = () => {
     >
       <EmbeddedCheckout />
     </EmbeddedCheckoutProvider>
-    </div> )} */}
+    </div> )}
 </>
 )}
       

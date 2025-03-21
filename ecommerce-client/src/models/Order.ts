@@ -1,3 +1,5 @@
+import { OrderItemCreate } from "./OrderItem"
+
 export type Order = {
     id: number,
 	customer_id: number,
@@ -30,3 +32,13 @@ export interface DetailedOrder extends Order {
 		}
 	]
 }
+
+export type OrderCreate = {
+	customer_id: number,
+	payment_status: string,
+	payment_id: string,
+	order_status: string,
+	order_items: OrderItemCreate[]
+}
+
+

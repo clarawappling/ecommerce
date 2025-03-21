@@ -7,3 +7,5 @@ export type OrderItem = {
 }
 
 export type OrderItemUpdate = Pick <OrderItem, 'quantity'>
+
+export type OrderItemCreate = Omit <OrderItem, 'id' >
