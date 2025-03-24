@@ -22,14 +22,7 @@ export const Checkout = () => {
   const {cart} = React.useContext(CartContext)
   const {getCustomerByEmailHandler, createCustomerHandler} = useCustomer();
   const {createOrderHandler} = useOrder();
-  // const [order, setOrder] = React.useState<OrderCreate>({
-  //   customer_id: 0,
-  //   payment_status: "Unpaid",
-  //   payment_id: "",
-  //   order_status: "Pending",
-  //   order_items: []
-  // })
-  // const [orderIdResponse, setOrderIdResponse] = React.useState<number>(0);
+
 
   const [clientSecret, setClientSecret] = React.useState<string | null>(null);
 // Initialize customer state with localStorage if appliable
@@ -49,43 +42,19 @@ export const Checkout = () => {
     const [customerIsCreated, setCustomerIsCreated] = React.useState(false);
 
 // Stripe integration
-    // const fetchClientSecret = React.useCallback(() => {
-    //     return fetch("http://localhost:3000/stripe/create-checkout-session-embedded", {
-    //       method: "POST",
-    //     })
-    //       .then((res) => res.json())
-    //       .then((data) => data.clientSecret);
-    //   }, []);
-    
-
-    // const fetchClientSecret = React.useCallback(async (order: StripeOrder) => {
-    //   try {
-    //     // Send the order data to the backend to create a checkout session
-    //     const response = await axios.post('http://localhost:3000/stripe/create-checkout-session-embedded', order, {
-    //       headers: {
-    //         "Content-Type": "application/json",  // Set the content type to JSON
-    //       }
-    //     });
 
     const fetchClientSecret = React.useCallback(async (payload: StripeOrder) => {
       
-      // const payload = {order_items:order.order_items, order_id: orderIdResponse}
       console.log(payload)
       try {
-        // Send the order data to the backend to create a checkout session
         const response = await axios.post('http://localhost:3000/stripe/create-checkout-session-embedded', payload) 
-        
-    
-        // Return the clientSecret from the response data
         return response.data.clientSecret;
       } catch (error) {
         console.error("Error fetching client secret:", error);
-        throw error;  // Rethrow or handle the error as needed
+        throw error; 
       }
     }, []);
 
-
-    const options = {fetchClientSecret};
 
 // Handle customer form changes
      const handleChange= (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,27 +98,10 @@ const handleClick = async () => {
       })
     };
 
-    // setOrder({...order, customer_id: customerId, order_items:cart.map((item) => {
-    //   return (
-    //     {product_id: item.product.id,
-    //       product_name: item.product.name,
-    //       quantity: item.quantity,
-    //       unit_price: item.product.price
-    //     }
-    //   )
-
-    // }) })
 const orderId = await createOrderHandler(order);
-
-// Kalla på stripe-order-handler. Skicka ett objekt med items + orderid.
 const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
 setClientSecret(fetchedClientSecret)
-
-// const clientSecret = await fetchClientSecret()
-
 return clientSecret;
-
-
 
 } catch {
     const response = await createCustomerHandler(customer)
@@ -173,30 +125,10 @@ return clientSecret;
       })
     };
 
-    // setOrder({...order, customer_id: customerId, order_items:cart.map((item) => {
-    //   return (
-    //     {product_id: item.product.id,
-    //       product_name: item.product.name,
-    //       quantity: item.quantity,
-    //       unit_price: item.product.price
-    //     }
-    //   )
-
-    // }) })
-
 const orderId = await createOrderHandler(order);
-
-// Kalla på stripe-order-handler. Skicka ett objekt med items + orderid.
 const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
 setClientSecret(fetchedClientSecret)
-
-// const clientSecret = await fetchClientSecret()
-
 return clientSecret;
-
-
-
-
   } 
 }
 
@@ -296,8 +228,7 @@ return (
     </EmbeddedCheckoutProvider>
     </div> )}
 </>
-)}
-      
-        </>
+)}     
+ </>
     )
 }
