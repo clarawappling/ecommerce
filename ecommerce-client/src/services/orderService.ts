@@ -31,7 +31,7 @@ import { StripeOrder } from "../models/StripeOrder";
 
         // GET ORDER BY PAYMENT ID
 
-        export const fetchOrderByPaymentId = async (paymentId: number): Promise <DetailedOrder> => {
+        export const fetchOrderByPaymentId = async (paymentId: string): Promise <DetailedOrder> => {
             try {
                 const response = await axios.get(`${ORDERS_URL}/${paymentId}`);
                 return response.data;
