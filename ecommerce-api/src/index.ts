@@ -80,6 +80,14 @@ app.post('/stripe/webhook', (req: Request, res: Response) => {
     case 'checkout.session.completed':
       const session = event.data.object;
       console.log(session)
+
+// Lägg till logik för vad som ska ske mot databasen
+// Uppdatera databasen i ordertabellen, uppdatera :
+// payment_status: "Paid",
+// payment_id: session.id,
+// order_status: "Completed"
+// uppdatera/set där id är samma som session.client_reference_id (plocka ut den variabeln)
+
       default: console.log("This event type is not handled")
   }
 
