@@ -44,7 +44,7 @@ const fetchOrderByIdHandler = async (id: number) => {
 
 // GET ORDER BY PAYMENT ID
 
-const fetchOrderByPaymentIdHandler = async (paymentId: number) => {
+const fetchOrderByPaymentIdHandler = async (paymentId: string) => {
     setIsLoading(true);
     
     try {
