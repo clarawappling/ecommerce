@@ -72,6 +72,20 @@ app.post('/stripe/create-checkout-session-embedded', async (req: Request, res: R
   res.send({clientSecret: session.client_secret});
 });
 
+
+app.post('/stripe/webhook', (req: Request, res: Response) => {
+  const event = req.body;
+
+  switch (event.type) {
+    case 'checkout.session.completed':
+      const session = event.data.object;
+      console.log(session)
+      default: console.log("This event type is not handled")
+  }
+
+  res.json({received: true});
+});
+
 // Routes
 import productRouter from "./routes/products";
 import customerRouter from "./routes/customers";
