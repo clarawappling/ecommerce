@@ -10,6 +10,9 @@ import { CustomerCreate } from "../models/Customer";
 import { useCustomer } from "../hooks/useCustomer";
 import { OrderCreate } from "../models/Order";
 import { useOrder } from "../hooks/useOrder";
+import axios from "axios";
+import { StripeOrder } from "../models/StripeOrder";
+
 
 
 const stripePromise = loadStripe('pk_test_51R4JflEUcfJR78A9I4729RJfcSNRKqB9njUYAcAAmJTLHAsbn8xWDNaakNUUyvbP2dHDE0UisUraA1GgHnwmmg1F00aCscjeAl')
@@ -20,6 +23,8 @@ export const Checkout = () => {
   const {getCustomerByEmailHandler, createCustomerHandler} = useCustomer();
   const {createOrderHandler} = useOrder();
 
+
+  const [clientSecret, setClientSecret] = React.useState<string | null>(null);
 // Initialize customer state with localStorage if appliable
   const [customer, setCustomer] = React.useState<CustomerCreate>(() => {
     const savedCustomer = localStorage.getItem('customer');
@@ -37,15 +42,19 @@ export const Checkout = () => {
     const [customerIsCreated, setCustomerIsCreated] = React.useState(false);
 
 // Stripe integration
-    const fetchClientSecret = React.useCallback(() => {
-        return fetch("http://localhost:3000/stripe/create-checkout-session-embedded", {
-          method: "POST",
-        })
-          .then((res) => res.json())
-          .then((data) => data.clientSecret);
-      }, []);
-    const options = {fetchClientSecret};
-    
+
+    const fetchClientSecret = React.useCallback(async (payload: StripeOrder) => {
+      
+      console.log(payload)
+      try {
+        const response = await axios.post('http://localhost:3000/stripe/create-checkout-session-embedded', payload) 
+        return response.data.clientSecret;
+      } catch (error) {
+        console.error("Error fetching client secret:", error);
+        throw error; 
+      }
+    }, []);
+
 
 // Handle customer form changes
      const handleChange= (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,8 +97,11 @@ const handleClick = async () => {
  
       })
     };
-const orderResponse = await createOrderHandler(order);
-console.log(orderResponse)
+
+const orderId = await createOrderHandler(order);
+const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
+setClientSecret(fetchedClientSecret)
+return clientSecret;
 
 } catch {
     const response = await createCustomerHandler(customer)
@@ -107,13 +119,16 @@ console.log(orderResponse)
             product_name: item.product.name,
             quantity: item.quantity,
             unit_price: item.product.price
-           }
+          }
         )
+ 
       })
     };
-    const orderResponse = await createOrderHandler(order);
-    console.log(orderResponse)
-    
+
+const orderId = await createOrderHandler(order);
+const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
+setClientSecret(fetchedClientSecret)
+return clientSecret;
   } 
 }
 
@@ -202,19 +217,18 @@ return (
             { customerIsCreated === true && (
               <button onClick={handleClick} className="happy-btn">Betala</button>
               )}
-             { customerIsCreated === true && (
+             { clientSecret && (
             
   <div id="stripe-container">
   <EmbeddedCheckoutProvider
       stripe={stripePromise}
-      options={options}
+      options={{clientSecret}}
     >
       <EmbeddedCheckout />
     </EmbeddedCheckoutProvider>
     </div> )}
 </>
-)}
-      
-        </>
+)}     
+ </>
     )
 }

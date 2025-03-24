@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { DetailedOrder, Order, OrderCreate, OrderStatusUpdate } from "../models/Order"
-import { createOrder, deleteOrder, fetchOrderById, fetchOrderByPaymentId, fetchOrders, updateOrderStatus } from "../services/orderService";
+import { createOrder, deleteOrder, fetchOrderById, fetchOrderByPaymentId, fetchOrders, orderToStripe, updateOrderStatus } from "../services/orderService";
+import { StripeOrder } from "../models/StripeOrder";
 
 export const useOrder = () => {
 
@@ -71,6 +72,20 @@ const createOrderHandler = async (payload: OrderCreate) => {
         setIsLoading(false);
     }
 }
+
+// CREATE STRIPE CALL 
+
+const createStripeOrderHandler = async (payload: StripeOrder) => {
+    try {
+        const response = await orderToStripe(payload);
+        return response;
+    } catch (error) {
+        setError('Error sending data to stripe')
+    }
+}
+
+
+
 // DELETE ORDER
 
 const deleteOrderHandler = async (id: number) => {
@@ -112,6 +127,7 @@ return {
     updateOrderStatusHandler,
     fetchOrderByIdHandler,
     fetchOrderByPaymentIdHandler,
-    createOrderHandler
+    createOrderHandler,
+    createStripeOrderHandler
 }
 }

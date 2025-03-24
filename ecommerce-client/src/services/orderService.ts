@@ -1,6 +1,7 @@
 import axios from "axios"
 import { DetailedOrder, Order, OrderCreate, OrderStatusUpdate } from "../models/Order";
 import { OrderCreateResponse } from "../models/OrderCreateResponse";
+import { StripeOrder } from "../models/StripeOrder";
 
 
     const ORDERS_URL = "http://localhost:3000/orders"
@@ -74,3 +75,16 @@ import { OrderCreateResponse } from "../models/OrderCreateResponse";
 
         }
     }
+
+// ORDER TO STRIPE
+export const orderToStripe = async (payload: StripeOrder) => {
+    console.log(payload)
+    try {
+        const response = await axios.post('http://localhost:3000/stripe/create-checkout-session-embedded', payload);
+        response
+    } catch (error) {
+        console.log(error);
+        throw error;
+
+    }
+}
