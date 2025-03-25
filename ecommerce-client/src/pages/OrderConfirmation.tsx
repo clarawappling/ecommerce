@@ -9,8 +9,6 @@ import { CartActionType } from "../reducers/CartReducer";
 export const OrderConfirmation = () => {
     const location = useLocation();
 
-
-    const [paymentId, setPaymentId] = useState<string |null>(null);
     const {fetchOrderByPaymentIdHandler} = useOrder();
     const [order, setOrder] = useState <DetailedOrder | null> (null);
     const {dispatch} = useContext(CartContext);
@@ -25,8 +23,6 @@ export const OrderConfirmation = () => {
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
         const paymentIdQuery = queryParams.get('session_id');
-        // Hoppa över statet? Kommer inte hinna sättas i useEffecten
-        setPaymentId(paymentIdQuery);
 
         const getOrderBySessionId = async () => {
             if(paymentIdQuery) {
@@ -46,10 +42,11 @@ export const OrderConfirmation = () => {
     }, [])
 
 
-    // Loading spinner
+    // Add loading spinner
+    
     return (
         <>
-        {/* Villkor order hämtad */}
+        {/* Lägg till villkor order hämtad? */}
         <h1>Orderbekräftelse</h1>
         <p>Tack för din beställning, {order?.customer_firstname}! 
         Vi är så glada över att du valt att handla hos oss.</p> <p>Nedan hittar du en sammanfattning av den order som är på väg hem till dig.</p>
