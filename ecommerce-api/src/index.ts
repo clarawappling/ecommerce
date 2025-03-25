@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
-import {connectDB} from "./config/db";
+import {connectDB, db} from "./config/db";
 import cors from "cors";
 
 dotenv.config();
@@ -72,12 +72,39 @@ app.post('/stripe/create-checkout-session-embedded', async (req: Request, res: R
   res.send({clientSecret: session.client_secret});
 });
 
+
+app.post('/stripe/webhook', async (req: Request, res: Response) => {
+  const event = req.body;
+
+  switch (event.type) {
+    case 'checkout.session.completed':
+      const session = event.data.object;
+      console.log(session)
+
+      const sql = `
+      UPDATE orders
+      SET payment_status = ?, payment_id = ?, order_status = ?
+      WHERE id = ?
+      `;
+      
+      const params = [session.payment_status, session.id, session.status, session.client_reference_id]
+      await db.query<ResultSetHeader>(sql, params)
+
+// Lägg till logik för att uppdater stock-quantity
+
+      default: console.log("This event type is not handled")
+  }
+
+  res.json({received: true});
+});
+
 // Routes
 import productRouter from "./routes/products";
 import customerRouter from "./routes/customers";
 import orderRouter from "./routes/orders";
 import orderItemRouter from "./routes/orderItems";
 import { IStripeOrder } from "./models/IStripeOrder";
+import { ResultSetHeader } from "mysql2";
 app.use('/products', productRouter)
 app.use('/customers', customerRouter)
 app.use('/orders', orderRouter)
