@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router"
 import { useOrder } from "../hooks/useOrder";
 import { DetailedOrder } from "../models/Order";
 import "../styles/OrderConfirmation.css"
+import CartContext from "../contexts/CartContext";
+import { CartActionType } from "../reducers/CartReducer";
 
 export const OrderConfirmation = () => {
     const location = useLocation();
@@ -10,8 +12,16 @@ export const OrderConfirmation = () => {
 
     const [paymentId, setPaymentId] = useState<string |null>(null);
     const {fetchOrderByPaymentIdHandler} = useOrder();
-    const [order, setOrder] = useState <DetailedOrder | null> (null)
+    const [order, setOrder] = useState <DetailedOrder | null> (null);
+    const {dispatch} = useContext(CartContext);
 
+
+    const handleEmptyCart = () => {
+            dispatch ({
+                type: CartActionType.RESET_CART,
+                payload: null
+            })
+        }
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
         const paymentIdQuery = queryParams.get('session_id');
@@ -27,7 +37,13 @@ export const OrderConfirmation = () => {
            
         } 
         getOrderBySessionId();
+
     }, [location.search])
+
+    useEffect (() => {
+        handleEmptyCart()
+        localStorage.removeItem('customer');
+    }, [])
 
 
     // Loading spinner
