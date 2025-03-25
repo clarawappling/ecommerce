@@ -18,9 +18,11 @@ export const OrderConfirmation = () => {
         const getOrderBySessionId = async () => {
             if(paymentIdQuery) {
                 const order =  await fetchOrderByPaymentIdHandler(paymentIdQuery)
+                console.log(order)
             }
            
         } 
+        getOrderBySessionId();
     }, [location.search])
 
 
