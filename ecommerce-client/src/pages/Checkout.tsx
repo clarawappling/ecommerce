@@ -139,7 +139,7 @@ return (
         <Cart/>
 {
   cart.length > 0 && (
-<> { !clientSecret && (
+<> { !clientSecret && customerIsCreated === false && (
   <div className="customer-container">
                 <h2>Kundens information</h2>
                 <form onSubmit={handleSubmit}>
@@ -216,7 +216,7 @@ return (
 
 )}
     
-            { customerIsCreated === true && (
+            { customerIsCreated === true && !clientSecret && (
               <button onClick={handleClick} className="happy-btn">Betala</button>
               )}
              { clientSecret && (
