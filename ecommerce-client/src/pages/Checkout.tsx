@@ -64,79 +64,138 @@ export const Checkout = () => {
         }
 
 // Handle sumbit of customer form
-        const handleSubmit = (e: React.FormEvent) => {
+        const handleSubmit = async (e: React.FormEvent) => {
           e.preventDefault();
           if(!customer) return;
           localStorage.setItem('customer', JSON.stringify(customer))
           setCustomerIsCreated(true);
+
+          try {
+            const response = await getCustomerByEmailHandler(customer.email);
+            const customerId = response.id;
+            console.log("Existing Customer ID:", customerId);
+        
+            const order: OrderCreate = {
+              customer_id: customerId,
+              payment_status: "unpaid",
+              payment_id: "",
+              order_status: "pending",
+              order_items: cart.map((item) => {
+                return (
+                  {product_id: item.product.id,
+                    product_name: item.product.name,
+                    quantity: item.quantity,
+                    unit_price: item.product.price
+                  }
+                )
+         
+              })
+            };
+        
+        const orderId = await createOrderHandler(order);
+        const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
+        setClientSecret(fetchedClientSecret)
+        return clientSecret;
+        
+        } catch {
+            const response = await createCustomerHandler(customer)
+            const customerId = response.id;
+            console.log("New Customer ID:", customerId);
+        
+            const order: OrderCreate = {
+              customer_id: customerId,
+              payment_status: "unpaid",
+              payment_id: "",
+              order_status: "pending",
+              order_items: cart.map((item) => {
+                return (
+                  {product_id: item.product.id,
+                    product_name: item.product.name,
+                    quantity: item.quantity,
+                    unit_price: item.product.price
+                  }
+                )
+         
+              })
+            };
+        
+        const orderId = await createOrderHandler(order);
+        const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
+        setClientSecret(fetchedClientSecret)
+        return clientSecret;
+          } 
         }
 
 
-
-const handleClick = async () => {
-  console.log(customer.email)
+// const handleClick = async () => {
+//   console.log(customer.email)
   
-  try {
-    const response = await getCustomerByEmailHandler(customer.email);
-    const customerId = response.id;
-    console.log("Existing Customer ID:", customerId);
+//   try {
+//     const response = await getCustomerByEmailHandler(customer.email);
+//     const customerId = response.id;
+//     console.log("Existing Customer ID:", customerId);
 
-    const order: OrderCreate = {
-      customer_id: customerId,
-      payment_status: "unpaid",
-      payment_id: "",
-      order_status: "pending",
-      order_items: cart.map((item) => {
-        return (
-          {product_id: item.product.id,
-            product_name: item.product.name,
-            quantity: item.quantity,
-            unit_price: item.product.price
-          }
-        )
+//     const order: OrderCreate = {
+//       customer_id: customerId,
+//       payment_status: "unpaid",
+//       payment_id: "",
+//       order_status: "pending",
+//       order_items: cart.map((item) => {
+//         return (
+//           {product_id: item.product.id,
+//             product_name: item.product.name,
+//             quantity: item.quantity,
+//             unit_price: item.product.price
+//           }
+//         )
  
-      })
-    };
+//       })
+//     };
 
-const orderId = await createOrderHandler(order);
-const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
-setClientSecret(fetchedClientSecret)
-return clientSecret;
+// const orderId = await createOrderHandler(order);
+// const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
+// setClientSecret(fetchedClientSecret)
+// return clientSecret;
 
-} catch {
-    const response = await createCustomerHandler(customer)
-    const customerId = response.id;
-    console.log("New Customer ID:", customerId);
+// } catch {
+//     const response = await createCustomerHandler(customer)
+//     const customerId = response.id;
+//     console.log("New Customer ID:", customerId);
 
-    const order: OrderCreate = {
-      customer_id: customerId,
-      payment_status: "unpaid",
-      payment_id: "",
-      order_status: "pending",
-      order_items: cart.map((item) => {
-        return (
-          {product_id: item.product.id,
-            product_name: item.product.name,
-            quantity: item.quantity,
-            unit_price: item.product.price
-          }
-        )
+//     const order: OrderCreate = {
+//       customer_id: customerId,
+//       payment_status: "unpaid",
+//       payment_id: "",
+//       order_status: "pending",
+//       order_items: cart.map((item) => {
+//         return (
+//           {product_id: item.product.id,
+//             product_name: item.product.name,
+//             quantity: item.quantity,
+//             unit_price: item.product.price
+//           }
+//         )
  
-      })
-    };
+//       })
+//     };
 
-const orderId = await createOrderHandler(order);
-const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
-setClientSecret(fetchedClientSecret)
-return clientSecret;
-  } 
-}
+// const orderId = await createOrderHandler(order);
+// const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
+// setClientSecret(fetchedClientSecret)
+// return clientSecret;
+//   } 
+// }
 
 return (
         <>
-        <h1>Checkout</h1>
+        {/* { !clientSecret && (
+          <>
+          <h1>Checkout</h1>
         <h2>Varukorg</h2>
         <Cart/>
+        </>
+        )}
+         */}
 {
   cart.length > 0 && (
 <> { !clientSecret && customerIsCreated === false && (
@@ -209,16 +268,16 @@ return (
                         required
                     />
                     { customerIsCreated === false && (
-                    <button>Spara uppgifter och gå till nästa steg</button>
+                    <button>Spara uppgifter och gå till betalning</button>
                   )}
                 </form>
             </div>
 
 )}
     
-            { customerIsCreated === true && !clientSecret && (
+            {/* { customerIsCreated === true && !clientSecret && (
               <button onClick={handleClick} className="happy-btn">Betala</button>
-              )}
+              )} */}
              { clientSecret && (
             
   <div id="stripe-container">
