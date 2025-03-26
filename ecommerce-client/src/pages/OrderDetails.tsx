@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router"
 import { useOrder } from "../hooks/useOrder";
 import { DetailedOrder } from "../models/Order";
-import { NavigationAdmin } from "../components/NavigationAdmin";
 import "../styles/OrderDetails.css";
 import { useOrderItem } from "../hooks/useOrderItem";
 
@@ -39,17 +38,17 @@ export const OrderDetails = () => {
         <i>{order?.customer_city}</i>
 
         <h3>Orderdetaljer</h3>
-        <p>Orderstatus: {order?.order_status}</p>
-        <p>Betalning: {order?.payment_status}</p>
+        <p>Orderstatus: {order?.order_status === "pending" ? "pågående" : "slutförd"}</p>
+        <p>Betalning: {order?.payment_status === "paid" ? "genomförd" : "ej betalt"}</p>
         <p>Summa: {order?.total_price} SEK</p>
 
         <h3>Produkter</h3>
         {order?.order_items.map((item) => {
           return (
             <div className="order-item" key={item.id}>
-              <p>Produkt: {item.product_name}</p>
+              <h4>{item.product_name}</h4>
               <p>Antal beställda: {item.quantity}</p>
-              <p>À pris: {item.unit_price}</p>
+              <p>À pris: {item.unit_price} SEK</p>
               <button onClick={() => deleteOrderItemHandler(item.id)}>Ta bort</button>
               <button onClick={() => {handleClick(item.id, item.quantity, item.product_name)}}>Ändra antal</button>
             </div>

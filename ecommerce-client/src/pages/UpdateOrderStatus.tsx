@@ -3,7 +3,6 @@ import { DetailedOrder } from "../models/Order"
 import { useNavigate, useParams } from "react-router";
 import { useOrder } from "../hooks/useOrder";
 import { formatDate } from "../utils/formatDate";
-import { NavigationAdmin } from "../components/NavigationAdmin";
 
 export const UpdateOrderStatus = () => {
     const [order, setOrder] = useState<DetailedOrder | null>(null);
@@ -54,7 +53,7 @@ export const UpdateOrderStatus = () => {
                 <label htmlFor="order_status">Orderstatus: </label>
                 <select name="order_status" id="order_status" value={order?.order_status ?? ''}onChange={(e) => {handleChange(e)}}>
                     <option value="complete">Slutförd</option>
-                    <option value="pending">Väntar</option>
+                    <option value="pending">Pågående</option>
                 </select>
                 <button>Spara</button>
                 <button onClick={(e) => {handleClick(e)}}>Avbryt</button>
