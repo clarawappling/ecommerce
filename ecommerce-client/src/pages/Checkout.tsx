@@ -83,9 +83,9 @@ const handleClick = async () => {
 
     const order: OrderCreate = {
       customer_id: customerId,
-      payment_status: "Unpaid",
+      payment_status: "unpaid",
       payment_id: "",
-      order_status: "Pending",
+      order_status: "pending",
       order_items: cart.map((item) => {
         return (
           {product_id: item.product.id,
@@ -110,9 +110,9 @@ return clientSecret;
 
     const order: OrderCreate = {
       customer_id: customerId,
-      payment_status: "Unpaid",
+      payment_status: "unpaid",
       payment_id: "",
-      order_status: "Pending",
+      order_status: "pending",
       order_items: cart.map((item) => {
         return (
           {product_id: item.product.id,
