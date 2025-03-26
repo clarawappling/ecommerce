@@ -88,9 +88,26 @@ app.post('/stripe/webhook', async (req: Request, res: Response) => {
       `;
       
       const params = [session.payment_status, session.id, session.status, session.client_reference_id]
-      await db.query<ResultSetHeader>(sql, params)
+      await db.query<ResultSetHeader>(sql, params);
 
-// Lägg till logik för att uppdater stock-quantity
+    const fullSession = await stripe.checkout.sessions.retrieve(session.id, {   
+  expand: ['line_items'], 
+    });
+
+    const lineItems = fullSession.line_items.data || [];
+
+    for (const item of lineItems) {
+      const productName = item.description;
+      const quantityOrdered = item.quantity;
+
+      const updateStockSQL = `
+      UPDATE products
+      SET stock = stock - ?
+      WHERE name = ?
+      `;
+      const updateParams = [quantityOrdered, productName];
+      await db.query<ResultSetHeader>(updateStockSQL, updateParams);
+    }
 
       default: console.log("This event type is not handled")
   }
