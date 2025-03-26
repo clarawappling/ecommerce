@@ -53,9 +53,8 @@ export const UpdateOrderStatus = () => {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="order_status">Orderstatus: </label>
                 <select name="order_status" id="order_status" value={order?.order_status ?? ''}onChange={(e) => {handleChange(e)}}>
-                    <option value="paid">Paid</option>
-                    <option value="processing">Processing</option>
-                    <option value="unpaid">Unpaid</option>
+                    <option value="complete">Slutförd</option>
+                    <option value="pending">Väntar</option>
                 </select>
                 <button>Spara</button>
                 <button onClick={(e) => {handleClick(e)}}>Avbryt</button>
