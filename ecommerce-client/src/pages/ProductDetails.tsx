@@ -14,12 +14,24 @@ export const ProductDetails = () => {
     const [product, setProduct] = useState<Product | null>(null);
     const {fetchProductByIdHandler, error, isLoading} = useProduct();
     const {dispatch} = useContext(CartContext);
+    const [saldo, setSaldo] = useState<string | null >(null)
+
 
     useEffect(() => {
-        if(!params.id) return;
-        const idAsNumber = +params.id
-        fetchProductByIdHandler(idAsNumber).then((data) => setProduct(data));
-    }, [])
+        if (!params.id) return;
+        const idAsNumber = +params.id;
+        fetchProductByIdHandler(idAsNumber).then((data) => {
+            setProduct(data);
+  
+            if (data.stock === 0) {
+                setSaldo("Slutsåld");
+            } else if (data.stock < 10) {
+                setSaldo("Fåtal kvar i lager");
+            } else {
+                setSaldo("Stort antal i lager");
+            }
+        });
+    }, [params.id]);
 
     const handleAddToCart = (product: Product, quantity: number) => {
         dispatch({
@@ -27,7 +39,8 @@ export const ProductDetails = () => {
             payload: new CartItem(product, quantity)
         })
     }
-    
+ 
+
     if(isLoading) return <span className="loader"></span>
     if(error) return <p>{error}</p>
     
@@ -39,12 +52,16 @@ export const ProductDetails = () => {
                             <p className="product-price">{product?.price} SEK</p>
                             <p className="product-description">{product?.description}</p>
                             <i>Kategori: {product?.category}</i>
-                            <p>Lagersaldo: {product?.stock}</p>
-                            <button 
+                            <p>{saldo}</p>
+                         
+                         { saldo !== "Slutsåld" && (
+                             <button 
                             onClick={() => { if (product) {handleAddToCart(product, 1)}}}
                             disabled={!product}>
                             Lägg i varukorg
                             </button>
+                         )}  
+                           
                         </div>
         </>
     )

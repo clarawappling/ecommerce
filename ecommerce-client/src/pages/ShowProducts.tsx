@@ -46,7 +46,10 @@ export const ShowProducts = () => {
                             <p className="product-description">{product.description}</p>
                             <p className="product-price">{product.price} SEK</p>
                             <br></br>
+                            {product.stock !== 0 ?
                             <button onClick={() => handleAddToCart(product, 1)}>Lägg i varukorg</button>
+                            : <p>Slutsåld</p>
+                        }
                         </div>
                     )
                     )
