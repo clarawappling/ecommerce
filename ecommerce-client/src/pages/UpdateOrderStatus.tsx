@@ -5,11 +5,11 @@ import { useOrder } from "../hooks/useOrder";
 import { formatDate } from "../utils/formatDate";
 
 export const UpdateOrderStatus = () => {
+    
     const [order, setOrder] = useState<DetailedOrder | null>(null);
     const params = useParams();
     const {isLoading, error, updateOrderStatusHandler, fetchOrderByIdHandler} = useOrder();
     const navigate = useNavigate();
-
 
         useEffect(() => {
             if(!params.id) return;
@@ -46,21 +46,19 @@ export const UpdateOrderStatus = () => {
 
     return (
         <>
-        <div className="update-order-status-container">
-            <h2>Uppdatera orderstatus</h2>
-            <h4>{order?.customer_firstname} {order?.customer_lastname}, order-id: {order?.id}, Skapad: {order ? formatDate(order.created_at) : "" }</h4>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="order_status">Orderstatus: </label>
-                <select name="order_status" id="order_status" value={order?.order_status ?? ''}onChange={(e) => {handleChange(e)}}>
-                    <option value="complete">Slutförd</option>
-                    <option value="pending">Pågående</option>
-                </select>
-                <button>Spara</button>
-                <button onClick={(e) => {handleClick(e)}}>Avbryt</button>
-                
-            </form>
-            
-        </div>
+            <div className="update-order-status-container">
+                <h2>Uppdatera orderstatus</h2>
+                <h4>{order?.customer_firstname} {order?.customer_lastname}, order-id: {order?.id}, Skapad: {order ? formatDate(order.created_at) : "" }</h4>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="order_status">Orderstatus: </label>
+                    <select name="order_status" id="order_status" value={order?.order_status ?? ''}onChange={(e) => {handleChange(e)}}>
+                        <option value="complete">Slutförd</option>
+                        <option value="pending">Pågående</option>
+                    </select>
+                    <button>Spara</button>
+                    <button onClick={(e) => {handleClick(e)}}>Avbryt</button>
+                </form>
+            </div>
         </>
     )
 }

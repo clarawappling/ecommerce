@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react"
 import { CustomerCreate } from "../models/Customer"
 import { useCustomer } from "../hooks/useCustomer"
-import { useLocation, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 
 export const CreateCustomer = () => {
     
@@ -17,20 +17,15 @@ export const CreateCustomer = () => {
 
     const {error, isLoading, createCustomerHandler} = useCustomer();
     const navigate = useNavigate();
-    const location = useLocation();
 
     const handleChange= (e: ChangeEvent<HTMLInputElement>) => {
         if(!customer) return;
         const {name, value} = e.target
         setCustomer({...customer, [name]: value})
     }
+
     const handleClick = ()=> {
-        if (location.pathname === "/admin/create-customer") {
             navigate("/admin/customers");
-         }
-         if (location.pathname === "/checkout") {
-            navigate("/cart-page");
-         }
      }
 
        const handleSubmit = async (e: FormEvent) => {
@@ -45,13 +40,8 @@ export const CreateCustomer = () => {
                  postal_code: customer.postal_code,
                  city: customer.city,
                  country: customer.country,
-             });
-             if (location.pathname === "/admin/create-customer") {
+             }); 
                 navigate("/admin/customers");
-             }
-             if (location.pathname === "/checkout") {
-                navigate("/cart-page");
-             }
           }
 
           
@@ -69,6 +59,7 @@ export const CreateCustomer = () => {
                         id="firstname"
                         value={customer?.firstname ?? ''}
                         onChange={(e) => {handleChange(e)}}
+                        required
                     />
                        <label htmlFor="lastname">Efternamn: </label>
                     <input
@@ -76,6 +67,7 @@ export const CreateCustomer = () => {
                         id="lastname"
                         value={customer?.lastname ?? ''}
                         onChange={(e) => {handleChange(e)}}
+                        required
                     />
                        <label htmlFor="email">E-mail: </label>
                     <input
@@ -83,6 +75,7 @@ export const CreateCustomer = () => {
                         id="email"
                         value={customer?.email ?? ''}
                         onChange={(e) => {handleChange(e)}}
+                        required
                     />
                        <label htmlFor="phone">Telefonnummer: </label>
                     <input
@@ -90,6 +83,7 @@ export const CreateCustomer = () => {
                         id="phone"
                         value={customer?.phone ?? ''}
                         onChange={(e) => {handleChange(e)}}
+                        required
                     />
                 
                        <label htmlFor="street_address">Gatuadress: </label>
@@ -98,6 +92,7 @@ export const CreateCustomer = () => {
                         id="street_address"
                         value={customer?.street_address ?? ''}
                         onChange={(e) => {handleChange(e)}}
+                        required
                     />
                        <label htmlFor="postal_code">Postkod: </label>
                     <input
@@ -105,6 +100,7 @@ export const CreateCustomer = () => {
                         id="postal_code"
                         value={customer?.postal_code ?? ''}
                         onChange={(e) => {handleChange(e)}}
+                        required
                     />
                     <label htmlFor="city">Ort: </label>
                       <input
@@ -112,6 +108,7 @@ export const CreateCustomer = () => {
                         id="city"
                         value={customer?.city ?? ''}
                         onChange={(e) => {handleChange(e)}}
+                        required
                     />
                        <label htmlFor="country">Land: </label>
                     <input
@@ -119,6 +116,7 @@ export const CreateCustomer = () => {
                         id="country"
                         value={customer?.country ?? ''}
                         onChange={(e) => {handleChange(e)}}
+                        required
                     />
                     <button>Spara kundinformation</button>
                    

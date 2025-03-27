@@ -3,7 +3,6 @@ import { Customer } from "../models/Customer"
 import { useNavigate, useParams } from "react-router";
 import { useCustomer } from "../hooks/useCustomer";
 import "../styles/UpdateCustomer.css"
-import { NavigationAdmin } from "../components/NavigationAdmin";
 
 export const UpdateCustomer = () => {
 
@@ -32,7 +31,6 @@ export const UpdateCustomer = () => {
             lastname: customer.lastname,
             email: customer.email,
             phone: customer.phone,
-            password: customer.password,
             street_address: customer.street_address,
             postal_code: customer.postal_code,
             city: customer.city,
@@ -81,13 +79,6 @@ export const UpdateCustomer = () => {
                     value={customer?.phone ?? ''}
                     onChange={(e) => {handleChange(e)}}
                 />
-                   <label htmlFor="password">Lösenord: </label>
-                <input
-                    name="password"
-                    id="password"
-                    value={customer?.password ?? ''}
-                    onChange={(e) => {handleChange(e)}}
-                />
                    <label htmlFor="street_address">Gatuadress: </label>
                 <input
                     name="street_address"
@@ -117,7 +108,6 @@ export const UpdateCustomer = () => {
                     onChange={(e) => {handleChange(e)}}
                 />
                 <button>Uppdatera</button>
-               
             </form>
             <br></br>
             <button onClick={handleClick}>Avbryt</button>

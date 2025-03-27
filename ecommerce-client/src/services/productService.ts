@@ -4,7 +4,7 @@ import { Product, ProductCreate, ProductUpdate } from "../models/Product"
 const PRODUCTS_URL = "http://localhost:3000/products"
 
 
-// FETCH ALL PRODUCTS
+// GET ALL PRODUCTS
 export const fetchProducts = async (): Promise<Product[]> => {
     try {
         const response = await axios.get<Product[]>(`${PRODUCTS_URL}`);
@@ -15,7 +15,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
     }
 } 
 
-// FETCH SPECIFIC PRODUCT
+// GET SPECIFIC PRODUCT
 export const fetchProductById = async (id: number): Promise<Product> => {
     try {
         const response = await axios.get(`${PRODUCTS_URL}/${id}`)
@@ -26,11 +26,7 @@ export const fetchProductById = async (id: number): Promise<Product> => {
     }
 }
 
-
-
-
 // CREATE PRODUCT
-
 export const createProduct = async (payload: ProductCreate) => {
     try {
         await axios.post(`${PRODUCTS_URL}`, payload)
@@ -42,8 +38,6 @@ export const createProduct = async (payload: ProductCreate) => {
 }
 
 // UPDATE PRODUCT
-// Add type of response to promise, an object with a message? Testa att köra utan return
-
 export const updateProductByID = async (id: number, payload: ProductUpdate) => {
     try {
         await axios.patch(`${PRODUCTS_URL}/${id}`, payload);

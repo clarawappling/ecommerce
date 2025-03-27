@@ -15,7 +15,6 @@ export const deleteOrderItem = async (id: number) => {
 }
 
 // UPDATE ORDER ITEM
-
 export const updateOrderItem = async (id: number, payload: OrderItemUpdate) => {
     try {
         await axios.patch(ORDER_ITEM_URL + id, payload)

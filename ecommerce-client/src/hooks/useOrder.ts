@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { DetailedOrder, Order, OrderCreate, OrderStatusUpdate } from "../models/Order"
-import { createOrder, deleteOrder, fetchOrderById, fetchOrderByPaymentId, fetchOrders, orderToStripe, updateOrderStatus } from "../services/orderService";
-import { StripeOrder } from "../models/StripeOrder";
+import { createOrder, deleteOrder, fetchOrderById, fetchOrderByPaymentId, fetchOrders, updateOrderStatus } from "../services/orderService";
 
 export const useOrder = () => {
 
@@ -9,12 +8,9 @@ const [orders, setOrders] = useState<Order[]>([]);
 const [error, setError] = useState<string>("");
 const [isLoading, setIsLoading] = useState<boolean>(false)
 
-
 // GET ALL ORDERS
-
 const fetchOrdersHandler = async () => {
     setIsLoading(true);
-
     try {
         const data = await fetchOrders();
         setOrders(data);
@@ -27,10 +23,9 @@ const fetchOrdersHandler = async () => {
 }
 
 // GET ORDER BY ORDER ID
-
 const fetchOrderByIdHandler = async (id: number) => {
     setIsLoading(true);
-    
+
     try {
         const data: DetailedOrder = await fetchOrderById(id);
         return data;
@@ -43,10 +38,8 @@ const fetchOrderByIdHandler = async (id: number) => {
 }
 
 // GET ORDER BY PAYMENT ID
-
 const fetchOrderByPaymentIdHandler = async (paymentId: string) => {
     setIsLoading(true);
-    
     try {
         const data: DetailedOrder = await fetchOrderByPaymentId(paymentId);
         return data;
@@ -59,7 +52,6 @@ const fetchOrderByPaymentIdHandler = async (paymentId: string) => {
 }
 
 // CREATE NEW ORDER
-
 const createOrderHandler = async (payload: OrderCreate) => {
     setIsLoading(true)
     try {
@@ -73,21 +65,7 @@ const createOrderHandler = async (payload: OrderCreate) => {
     }
 }
 
-// CREATE STRIPE CALL 
-
-const createStripeOrderHandler = async (payload: StripeOrder) => {
-    try {
-        const response = await orderToStripe(payload);
-        return response;
-    } catch (error) {
-        setError('Error sending data to stripe')
-    }
-}
-
-
-
 // DELETE ORDER
-
 const deleteOrderHandler = async (id: number) => {
     setIsLoading(true)
     try {
@@ -101,14 +79,9 @@ const deleteOrderHandler = async (id: number) => {
     }
 }
 
-
 // UPDATE ORDER STATUS
-// Addera fler parametrar att uppdatera (payment id och payment status, uppdatera även modell och admin.
-// Alt. gör en ny tjänst som uppdaterar alla tre istället för bara status)
-
 const updateOrderStatusHandler = async (id: number, payload: OrderStatusUpdate) => {
     setIsLoading(true);
-
     try {
         await updateOrderStatus(id, payload);
     } catch (error) {
@@ -128,6 +101,5 @@ return {
     fetchOrderByIdHandler,
     fetchOrderByPaymentIdHandler,
     createOrderHandler,
-    createStripeOrderHandler
 }
 }

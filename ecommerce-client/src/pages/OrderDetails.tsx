@@ -9,8 +9,8 @@ export const OrderDetails = () => {
     
     const params = useParams();
     const navigate = useNavigate()
-    const {fetchOrderByIdHandler}= useOrder();
-    const {deleteOrderItemHandler, error, isLoading} = useOrderItem();
+    const { fetchOrderByIdHandler, isLoading: orderIsLoading, error: orderError } = useOrder();
+    const { deleteOrderItemHandler, isLoading: orderItemIsLoading, error: orderItemError } = useOrderItem();
     const [order, setOrder] = useState<DetailedOrder | null>(null);
 
     useEffect(() => {
@@ -24,6 +24,9 @@ export const OrderDetails = () => {
       navigate("/admin/update-order-item/" + id + "/" + quantity + "/" + product_name)
     }
 
+    const isLoading = orderIsLoading || orderItemIsLoading;
+    const error = orderError || orderItemError;
+    
     if (isLoading) return <p>Loading..</p>
     if (error) return <p>{error}</p>
 

@@ -3,10 +3,10 @@ import { Product, ProductCreate, ProductUpdate } from "../models/Product"
 import { createProduct, deleteProduct, fetchProductById, fetchProducts, updateProductByID } from "../services/productService";
 
 export const useProduct = () => {
+    
     const [products, setProducts] = useState<Product[]>([]);
     const [error, setError] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false)
-
 
     // GET ALL PRODUCTS
     const fetchProductsHandler = async () => {
@@ -77,8 +77,6 @@ export const useProduct = () => {
         }
     } 
 
-
-    // RETURN ALL OF THE THESE
     return { 
         products, 
         isLoading, 
