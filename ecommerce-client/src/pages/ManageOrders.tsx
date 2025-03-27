@@ -17,8 +17,8 @@ export const ManageOrders = () => {
         navigate("/admin/update-order-status/" + id);
     }
 
-    if (isLoading) return <p>Loading..</p>
-    if (error) return <p>{error}</p>
+    if(isLoading) return <span className="loader"></span>
+    if(error) return <p>{error}</p>
 
     return (
         <>

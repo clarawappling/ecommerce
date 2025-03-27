@@ -43,8 +43,8 @@ export const UpdateCustomer = () => {
         navigate("/admin/customers");
      }
 
-    if(isLoading) return <p>Loading..</p>
-    if(error) return <p>{error}</p>
+     if(isLoading) return <span className="loader"></span>
+     if(error) return <p>{error}</p>
 
     return (
         <>
