@@ -22,7 +22,6 @@ const handleChange= (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTM
     if(!product) return;
 
     const {type, name, value} = e.target;
-
     if(type === "number") {
         setProduct({...product, [name]: +value})
     } else {
@@ -33,6 +32,7 @@ const handleChange= (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTM
 const handleSubmit = async (e:FormEvent) => {
     e.preventDefault()
     if(!product) return;
+
     await updateProductHandler(product.id, {
         name: product.name, 
         description: product.description,
@@ -61,7 +61,6 @@ const handleClick = () => {
                     id="name"
                     value={product?.name ?? ''}
                     onChange={(e) => {handleChange(e)}}
-
                   />
                   <label htmlFor="description">Beskrivning:</label>
                   <textarea
@@ -72,20 +71,20 @@ const handleClick = () => {
                   />
                   <label htmlFor="price">Pris:</label>
                   <input
-                  type="number"
-                  name="price"
-                  id="price"
-                  value={product?.price ?? ''}
-                  onChange={(e) => {handleChange(e)}}
+                    type="number"
+                    name="price"
+                    id="price"
+                    value={product?.price ?? ''}
+                    onChange={(e) => {handleChange(e)}}
 
                   />
                   <label htmlFor="stock">I lager:</label>
                   <input
-                  type="number"
-                  name="stock"
-                  id="stock"
-                  value={product?.stock ?? ''}
-                  onChange={(e) => {handleChange(e)}}
+                    type="number"
+                    name="stock"
+                    id="stock"
+                    value={product?.stock ?? ''}
+                    onChange={(e) => {handleChange(e)}}
 
                   />
                   <label htmlFor="image">Bildlänk:</label>
@@ -97,17 +96,16 @@ const handleClick = () => {
                     />
                    <label htmlFor="category">Välj kategori:</label>
                         <select id="category" name="category" value={product?.category ?? ''} onChange={handleChange}>
-                        <option value="Kläder">Kläder</option>
-                        <option value="Prydnader">Prydnader</option>
-                        <option value="Teknik">Teknik</option>
-                        <option value="Utomhuslek">Utomhuslek</option>
-                        <option value="Sport">Sport</option>
-                        <option value="Övriga leksaker">Övriga leksaker</option>
+                            <option value="Kläder">Kläder</option>
+                            <option value="Prydnader">Prydnader</option>
+                            <option value="Teknik">Teknik</option>
+                            <option value="Utomhuslek">Utomhuslek</option>
+                            <option value="Sport">Sport</option>
+                            <option value="Övriga leksaker">Övriga leksaker</option>
                         </select>
                         <button>Uppdatera</button>
                         <br></br>
                     <button onClick={handleClick}>Avbryt</button>
-
                 </form>
             </div>
         </>

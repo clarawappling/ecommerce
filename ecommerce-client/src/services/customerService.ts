@@ -15,6 +15,7 @@ export const getAllCustomers = async (): Promise<Customer[]> => {
         throw error;
     }
 }
+
 // GET CUSTOMER BY ID
 export const getCustomerById = async (id: number): Promise<Customer> => {
     try {
@@ -39,7 +40,6 @@ export const getCustomerByEmail = async (email: string): Promise<Customer> => {
     }
 }
 
-
 // CREATE CUSTOMER
 export const createCustomer = async (payload: CustomerCreate): Promise<CustomerCreateResponse> => {
     try {
@@ -52,7 +52,6 @@ export const createCustomer = async (payload: CustomerCreate): Promise<CustomerC
 }
 
 // UPDATE CUSTOMER
-
 export const updateCustomer = async (id: number, payload: CustomerUpdate) => {
     try {
         await axios.patch(`${CUSTOMERS_URL}/${id}`, payload);
@@ -63,7 +62,6 @@ export const updateCustomer = async (id: number, payload: CustomerUpdate) => {
 }
 
 // DELETE CUSTOMER
-
 export const deleteCustomer = async (id: number) => {
     try {
         await axios.delete(`${CUSTOMERS_URL}/${id}`);

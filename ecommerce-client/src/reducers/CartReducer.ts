@@ -1,12 +1,9 @@
-
 import { CartItem } from "../models/CartItem";
-
 
 export interface ICartAction {
   type: CartActionType;
   payload: CartItem | any;
 }
-
 
 export enum CartActionType  {
   ADD_ITEM,
@@ -41,7 +38,6 @@ export const CartReducer = (cart: CartItem[], action: ICartAction) => {
           const totalQuantity = item.quantity + (payload.quantity)
           return {...item, quantity: totalQuantity > 0 ? totalQuantity : 1}
         }
-
         return item;
       })
     }
