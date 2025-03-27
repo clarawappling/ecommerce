@@ -22,10 +22,8 @@ export const Checkout = () => {
   const {cart} = React.useContext(CartContext)
   const {getCustomerByEmailHandler, createCustomerHandler} = useCustomer();
   const {createOrderHandler} = useOrder();
-
-
+  
   const [clientSecret, setClientSecret] = React.useState<string | null>(null);
-// Initialize customer state with localStorage if appliable
   const [customer, setCustomer] = React.useState<CustomerCreate>(() => {
     const savedCustomer = localStorage.getItem('customer');
     return savedCustomer ? JSON.parse(savedCustomer) :
@@ -39,7 +37,7 @@ export const Checkout = () => {
         city: "", 
         street_address: ""}})
 
-    const [customerIsCreated, setCustomerIsCreated] = React.useState(false);
+    
 
 // Stripe integration
 
@@ -63,12 +61,11 @@ export const Checkout = () => {
             setCustomer({...customer, [name]: value})
         }
 
-// Handle sumbit of customer form
+// Handle sumbit 
         const handleSubmit = async (e: React.FormEvent) => {
           e.preventDefault();
           if(!customer) return;
           localStorage.setItem('customer', JSON.stringify(customer))
-          setCustomerIsCreated(true);
 
           try {
             const response = await getCustomerByEmailHandler(customer.email);
@@ -126,79 +123,12 @@ export const Checkout = () => {
           } 
         }
 
-
-// const handleClick = async () => {
-//   console.log(customer.email)
-  
-//   try {
-//     const response = await getCustomerByEmailHandler(customer.email);
-//     const customerId = response.id;
-//     console.log("Existing Customer ID:", customerId);
-
-//     const order: OrderCreate = {
-//       customer_id: customerId,
-//       payment_status: "unpaid",
-//       payment_id: "",
-//       order_status: "pending",
-//       order_items: cart.map((item) => {
-//         return (
-//           {product_id: item.product.id,
-//             product_name: item.product.name,
-//             quantity: item.quantity,
-//             unit_price: item.product.price
-//           }
-//         )
- 
-//       })
-//     };
-
-// const orderId = await createOrderHandler(order);
-// const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
-// setClientSecret(fetchedClientSecret)
-// return clientSecret;
-
-// } catch {
-//     const response = await createCustomerHandler(customer)
-//     const customerId = response.id;
-//     console.log("New Customer ID:", customerId);
-
-//     const order: OrderCreate = {
-//       customer_id: customerId,
-//       payment_status: "unpaid",
-//       payment_id: "",
-//       order_status: "pending",
-//       order_items: cart.map((item) => {
-//         return (
-//           {product_id: item.product.id,
-//             product_name: item.product.name,
-//             quantity: item.quantity,
-//             unit_price: item.product.price
-//           }
-//         )
- 
-//       })
-//     };
-
-// const orderId = await createOrderHandler(order);
-// const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
-// setClientSecret(fetchedClientSecret)
-// return clientSecret;
-//   } 
-// }
-
 return (
         <>
-        {/* { !clientSecret && (
-          <>
-          <h1>Checkout</h1>
-        <h2>Varukorg</h2>
-        <Cart/>
-        </>
-        )}
-         */}
+    
 {
   cart.length > 0 && (
-<> { !clientSecret && customerIsCreated === false && (
+<> { !clientSecret && (
   <div className="customer-container">
                 <h2>Kundens information</h2>
                 <form onSubmit={handleSubmit}>
@@ -267,17 +197,10 @@ return (
                         onChange={(e) => {handleChange(e)}}
                         required
                     />
-                    { customerIsCreated === false && (
                     <button>Spara uppgifter och gå till betalning</button>
-                  )}
                 </form>
             </div>
-
 )}
-    
-            {/* { customerIsCreated === true && !clientSecret && (
-              <button onClick={handleClick} className="happy-btn">Betala</button>
-              )} */}
              { clientSecret && (
             
   <div id="stripe-container">

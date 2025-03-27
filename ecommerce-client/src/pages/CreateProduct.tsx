@@ -2,7 +2,6 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import { ProductCreate } from "../models/Product"
 import { useProduct } from "../hooks/useProduct"
 import { useNavigate } from "react-router"
-import { NavigationAdmin } from "../components/NavigationAdmin"
 
 export const CreateProduct = () => {
     const [product, setProduct] = useState<ProductCreate>({name:"", description:"", price:0, stock:0, category:"", image:""})
@@ -52,7 +51,7 @@ export const CreateProduct = () => {
                     id="name"
                     value={product.name}
                     onChange={(e) => {handleChange(e)}}
-
+                    required
                   />
                   <label htmlFor="description">Beskrivning:</label>
                   <textarea
@@ -60,6 +59,7 @@ export const CreateProduct = () => {
                     id="description"
                     value={product.description}
                     onChange={(e) => {handleChange(e)}}
+                    required
                   />
                   <label htmlFor="price">Pris:</label>
                   <input
@@ -68,6 +68,7 @@ export const CreateProduct = () => {
                   id="price"
                   value={product.price}
                   onChange={(e) => {handleChange(e)}}
+                  required
 
                   />
                   <label htmlFor="stock">I lager:</label>
@@ -77,6 +78,7 @@ export const CreateProduct = () => {
                   id="stock"
                   value={product.stock}
                   onChange={(e) => {handleChange(e)}}
+                  required
 
                   />
                   <label htmlFor="image">Bildlänk:</label>
@@ -85,6 +87,7 @@ export const CreateProduct = () => {
                     id="image"
                     value={product.image}
                     onChange={(e) => {handleChange(e)}}
+                    required
                     />
                    <label htmlFor="category">Välj kategori:</label>
                         <select id="category" name="category" value={product.category} onChange={handleChange}>
