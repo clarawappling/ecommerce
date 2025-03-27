@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router"
 import { Navigation } from "../components/Navigation"
+import { Footer } from "../components/Footer"
 
 export const Layout = () => {
     
@@ -12,7 +13,7 @@ export const Layout = () => {
         <Outlet />
     </main>
 
-    <footer> <NavLink to={"/admin"}>Adminläge</NavLink> </footer>   
+    <footer> <Footer/> <NavLink to={"/admin"}>Adminläge</NavLink> </footer>   
     </>
 )
 }
