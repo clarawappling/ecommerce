@@ -71,3 +71,16 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+form {
+  input,
+  textarea,
+  select {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid lightblue;
+  }
+  button {
+    margin-top: 0.7rem;
+  }
+}
