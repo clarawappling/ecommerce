@@ -23,16 +23,20 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  margin: 0; 
   display: flex;
-  /* place-items: center;  */
-  min-width: 320px;
+  flex-wrap: wrap; 
+  justify-content: center;
+  place-items: center;  
+  /* min-width: 320px;  */
   min-height: 100vh;
 }
 
 main {
 margin-top: 10rem;
 margin-bottom: 10rem;
+margin-right: 1rem;
+margin-left: 1rem;
 }
 
 h1 {

@@ -14,7 +14,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 30px;
 }
 
 .product-customer-list {
@@ -29,7 +28,7 @@
 .product-customer-item {
     background-color: #0f7e8617;
     text-align: left;
-    padding: 3rem;   
+    padding: 2rem;   
     margin: 10px;
     min-width: 10%;
     display: flex;

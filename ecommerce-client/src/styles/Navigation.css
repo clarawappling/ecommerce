@@ -1,8 +1,16 @@
 #main-nav, #admin-nav {
+    /* position: fixed;
+    margin-top: 0px;
+    margin-left: 5px; */
+   
+
     ul {
         display: flex;
         list-style: none;
-        justify-content: flex-end;
-        gap: 10rem;
+        justify-content: center;
+        gap: 5rem;
+        
+
+
     }
 }
