@@ -3,6 +3,7 @@ import { Customer, CustomerCreate, CustomerUpdate } from "../models/Customer"
 import { createCustomer, deleteCustomer, getAllCustomers, getCustomerByEmail, getCustomerById, updateCustomer } from "../services/customerService";
 
 export const useCustomer = () => {
+    
     const [customers, setCustomers] = useState<Customer[]>([]);
     const [error, setError] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -62,34 +63,33 @@ export const useCustomer = () => {
         }
     }
 
-        // UPDATE CUSTOMER
-        const updateCustomerHandler = async (id: number, payload: CustomerUpdate) => {
-            setIsLoading(true);
-            try {
-                await updateCustomer(id, payload)
-            } catch (error) {
-                setError("Error updating customer");
-                throw error;
-            } finally {
-                setIsLoading(false);
-            }
+    // UPDATE CUSTOMER
+    const updateCustomerHandler = async (id: number, payload: CustomerUpdate) => {
+        setIsLoading(true);
+        try {
+            await updateCustomer(id, payload)
+        } catch (error) {
+            setError("Error updating customer");
+            throw error;
+        } finally {
+            setIsLoading(false);
         }
+    }
 
-           // DELETE CUSTOMER
-            const deleteCustomerHandler = async (id: number) => {
-                setIsLoading(true);
-                try {
-                    await deleteCustomer(id);
-                    const newList = customers.filter(customer => customer.id !== id);
-                    setCustomers(newList);
-                } catch (error) {
-                    setError("Error deleting customer");
-                    throw error;
-                } finally {
-                    setIsLoading(false);
-                }
-            } 
-
+    // DELETE CUSTOMER
+    const deleteCustomerHandler = async (id: number) => {
+        setIsLoading(true);
+        try {
+            await deleteCustomer(id);
+            const newList = customers.filter(customer => customer.id !== id);
+            setCustomers(newList);
+        } catch (error) {
+            setError("Error deleting customer");
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    } 
 
     return {
         getAllCustomersHandler,
