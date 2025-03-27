@@ -19,7 +19,7 @@ export const Checkout = () => {
 
   const {cart} = React.useContext(CartContext)
   const {getCustomerByEmailHandler, createCustomerHandler} = useCustomer();
-  const {createOrderHandler} = useOrder();
+  const {createOrderHandler, isLoading, error} = useOrder();
   
   const [clientSecret, setClientSecret] = React.useState<string | null>(null);
   const [customer, setCustomer] = React.useState<CustomerCreate>(() => {
@@ -109,14 +109,18 @@ export const Checkout = () => {
                 )
               })
             };
-        
-        const orderId = await createOrderHandler(order);
-        const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
-        setClientSecret(fetchedClientSecret)
-        return clientSecret;
-          } 
-        }
+      
+            const orderId = await createOrderHandler(order);
+            const fetchedClientSecret = await fetchClientSecret ({order_items: order.order_items, order_id: orderId})
+            setClientSecret(fetchedClientSecret)
+            return clientSecret;
+              } 
+            }
 
+
+      if (isLoading) return <p>Loading..</p>
+      if (error) return <p>{error}</p>
+      
 return (
         <> 
 {
