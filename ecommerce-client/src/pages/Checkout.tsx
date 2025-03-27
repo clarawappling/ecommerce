@@ -118,8 +118,8 @@ export const Checkout = () => {
             }
 
 
-      if (isLoading) return <p>Loading..</p>
-      if (error) return <p>{error}</p>
+            if(isLoading) return <span className="loader"></span>
+            if(error) return <p>{error}</p>
       
 return (
         <> 

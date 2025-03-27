@@ -37,7 +37,7 @@ export const CreateProduct = () => {
         navigate("/admin/products");
     }
 
-    if(isLoading) return <p>Loading..</p>
+    if(isLoading) return <span className="loader"></span>
     if(error) return <p>{error}</p>
 
     return (
