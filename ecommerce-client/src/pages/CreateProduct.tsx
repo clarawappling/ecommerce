@@ -4,6 +4,7 @@ import { useProduct } from "../hooks/useProduct"
 import { useNavigate } from "react-router"
 
 export const CreateProduct = () => {
+    
     const [product, setProduct] = useState<ProductCreate>({name:"", description:"", price:0, stock:0, category:"", image:""})
     const {isLoading, error, createProductHandler} = useProduct()
     const navigate = useNavigate()

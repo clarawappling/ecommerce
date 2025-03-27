@@ -1,4 +1,3 @@
-import { Cart } from "../components/Cart"
 import * as React from 'react';
 import {loadStripe} from '@stripe/stripe-js';
 import {
@@ -12,7 +11,6 @@ import { OrderCreate } from "../models/Order";
 import { useOrder } from "../hooks/useOrder";
 import axios from "axios";
 import { StripeOrder } from "../models/StripeOrder";
-
 
 
 const stripePromise = loadStripe('pk_test_51R4JflEUcfJR78A9I4729RJfcSNRKqB9njUYAcAAmJTLHAsbn8xWDNaakNUUyvbP2dHDE0UisUraA1GgHnwmmg1F00aCscjeAl')
@@ -38,7 +36,6 @@ export const Checkout = () => {
         street_address: ""}})
 
     
-
 // Stripe integration
 
     const fetchClientSecret = React.useCallback(async (payload: StripeOrder) => {
@@ -52,7 +49,6 @@ export const Checkout = () => {
         throw error; 
       }
     }, []);
-
 
 // Handle customer form changes
      const handleChange= (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +81,6 @@ export const Checkout = () => {
                     unit_price: item.product.price
                   }
                 )
-         
               })
             };
         
@@ -112,7 +107,6 @@ export const Checkout = () => {
                     unit_price: item.product.price
                   }
                 )
-         
               })
             };
         
@@ -124,8 +118,7 @@ export const Checkout = () => {
         }
 
 return (
-        <>
-    
+        <> 
 {
   cart.length > 0 && (
 <> { !clientSecret && (

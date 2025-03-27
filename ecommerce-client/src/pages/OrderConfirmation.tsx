@@ -7,12 +7,11 @@ import CartContext from "../contexts/CartContext";
 import { CartActionType } from "../reducers/CartReducer";
 
 export const OrderConfirmation = () => {
+    
     const location = useLocation();
-
-    const {fetchOrderByPaymentIdHandler} = useOrder();
+    const {fetchOrderByPaymentIdHandler, isLoading, error} = useOrder();
     const [order, setOrder] = useState <DetailedOrder | null> (null);
     const {dispatch} = useContext(CartContext);
-
 
     const handleEmptyCart = () => {
             dispatch ({
@@ -20,6 +19,7 @@ export const OrderConfirmation = () => {
                 payload: null
             })
         }
+
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
         const paymentIdQuery = queryParams.get('session_id');
@@ -28,9 +28,7 @@ export const OrderConfirmation = () => {
             if(paymentIdQuery) {
                 const data =  await fetchOrderByPaymentIdHandler(paymentIdQuery)
                 setOrder(data)
-                console.log(order)
             }
-           
         } 
         getOrderBySessionId();
 
@@ -41,15 +39,13 @@ export const OrderConfirmation = () => {
         localStorage.removeItem('customer');
     }, [])
 
-
-    // Add loading spinner
+     if (isLoading) return <p>Loading..</p>
+    if (error) return <p>{error}</p>
     
     return (
         <>
-        {/* Lägg till villkor order hämtad? */}
-        <h1>Orderbekräftelse</h1>
-        <p>Tack för din beställning, {order?.customer_firstname}! 
-        Vi är så glada över att du valt att handla hos oss.</p> <p>Nedan hittar du en sammanfattning av den order som är på väg hem till dig.</p>
+        <h1>Tack för din beställning, {order?.customer_firstname}! </h1>
+        <p>Vi är så glada över att du valt att handla hos oss. Nedan hittar du en sammanfattning av den order som är på väg hem till dig.</p>
         
             <h2>Orderdetaljer</h2>
             <div className="order-details-container">
@@ -65,7 +61,6 @@ export const OrderConfirmation = () => {
             })}
             </div>
             <h3>Total ordersumma: {order?.total_price} SEK</h3>
-        
         </>
     )
 }

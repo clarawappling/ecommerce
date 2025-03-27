@@ -9,6 +9,7 @@ import { CartActionType } from "../reducers/CartReducer";
 import { CartItem } from "../models/CartItem";
 
 export const ProductDetails = () => {
+    
     const params = useParams();
     const [product, setProduct] = useState<Product | null>(null);
     const {fetchProductByIdHandler, error, isLoading} = useProduct();
@@ -44,8 +45,6 @@ export const ProductDetails = () => {
                             disabled={!product}>
                             Lägg i varukorg
                             </button>
-
-                            
                         </div>
         </>
     )

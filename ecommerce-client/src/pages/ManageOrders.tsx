@@ -6,18 +6,15 @@ import { Link, useNavigate } from "react-router";
 export const ManageOrders = () => {
 
     const navigate = useNavigate();
-    
     const {error, isLoading, orders, fetchOrdersHandler, deleteOrderHandler} = useOrder();
 
     useEffect(() => {
         fetchOrdersHandler();
     }, []);
 
-
     const handleClick = (id: number) => {
         navigate("/admin/update-order-status/" + id);
     }
-
 
     if (isLoading) return <p>Loading..</p>
     if (error) return <p>{error}</p>

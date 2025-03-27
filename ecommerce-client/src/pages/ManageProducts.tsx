@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useProduct } from "../hooks/useProduct"
 import "../styles/ManageProducts.css"
 import { useNavigate } from "react-router";
-import { NavigationAdmin } from "../components/NavigationAdmin";
+
 
 export const ManageProducts = () => {
-    const navigate = useNavigate();
     
+    const navigate = useNavigate();
     const {products, isLoading, error, fetchProductsHandler, deleteProductHandler} = useProduct();
 
     useEffect (() => {
@@ -36,7 +36,6 @@ export const ManageProducts = () => {
                             <p>{product.stock} st</p>
                             <button onClick={() => {deleteProductHandler(product.id)}}>Ta bort</button>
                             <button onClick={() => {handleClick(product.id)}}>Uppdatera produkt</button>
-                    
                         </article>
                     )
                     )
