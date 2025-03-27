@@ -39,7 +39,7 @@ export const OrderConfirmation = () => {
         localStorage.removeItem('customer');
     }, [])
 
-     if (isLoading) return <p>Loading..</p>
+    if (isLoading) return <p>Loading..</p>
     if (error) return <p>{error}</p>
     
     return (

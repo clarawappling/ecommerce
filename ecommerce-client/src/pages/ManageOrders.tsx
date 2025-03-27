@@ -2,6 +2,7 @@ import {  useEffect } from "react"
 import { useOrder } from "../hooks/useOrder"
 import "../styles/ManageOrders.css"
 import { Link, useNavigate } from "react-router";
+import { formatDate } from "../utils/formatDate";
 
 export const ManageOrders = () => {
 
@@ -28,6 +29,7 @@ export const ManageOrders = () => {
                         orders.map((order) => (
                             <article className="order-item" key={order.id}>
                                 <Link className="order-link" to={`/admin/detailed-order/${order.id}`}> Order-id: {order.id}, {order.customer_firstname} {order.customer_lastname}</Link>
+                                <p>Orderdatum: {formatDate(order.created_at)}</p>
                                 <p>Totalt: {order.total_price} SEK</p>
                                 <p>Status: {order.order_status === "complete" ? "slutförd" : "pågående"}</p> 
                                 <button onClick={() => {deleteOrderHandler(order.id)}}>Ta bort</button>

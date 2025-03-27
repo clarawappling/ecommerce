@@ -19,6 +19,7 @@ export const CartPage = () => {
     const handleClick = () => {
         navigate("/checkout")
     }
+
     return (
         <>
         <h1>Varukorg</h1>

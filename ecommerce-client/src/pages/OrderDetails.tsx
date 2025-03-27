@@ -4,6 +4,7 @@ import { useOrder } from "../hooks/useOrder";
 import { DetailedOrder } from "../models/Order";
 import "../styles/OrderDetails.css";
 import { useOrderItem } from "../hooks/useOrderItem";
+import { formatDate } from "../utils/formatDate";
 
 export const OrderDetails = () => {
     
@@ -41,6 +42,7 @@ export const OrderDetails = () => {
         <i>{order?.customer_city}</i>
 
         <h3>Orderdetaljer</h3>
+        <p>Orderdatum: {order ? formatDate(order.created_at) : ""}</p>
         <p>Orderstatus: {order?.order_status === "pending" ? "pågående" : "slutförd"}</p>
         <p>Betalning: {order?.payment_status === "paid" ? "genomförd" : "ej betalt"}</p>
         <p>Summa: {order?.total_price} SEK</p>
