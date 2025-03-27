@@ -28,8 +28,7 @@ body {
   flex-wrap: wrap; 
   justify-content: center;
   place-items: center;  
-  /* min-width: 320px;  */
-  min-height: 100vh;
+
 }
 
 main {
