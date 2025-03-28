@@ -9,7 +9,7 @@ td {
   }
 
   th {
-    padding: 0.5rem;
+    padding: 0.7rem;
     background-color: #0f7e8617;
     border: solid 1px #0f7e8644;
     
@@ -26,14 +26,14 @@ td {
   }
 
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 580px) {
     table th:nth-child(3),
     table td:nth-child(3) {
       display: none;
     }
     
   }
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 860px) {
     table th:nth-child(4),
     table td:nth-child(4),
     table th:nth-child(1),
@@ -42,6 +42,12 @@ td {
       display: none;
     }
   }
+
+  .neutral-btn {
+    background-color: rgba(184, 221, 221, 0.589);
+    
+    
+}
 
 
   

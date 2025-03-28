@@ -83,8 +83,8 @@ if(error) return <p>{error}</p>
                     <th>Namn</th>
                     <th>E-mail</th>
                     <th>Telefonnummer</th>
-                    <th>Ta bort</th>
                     <th>Uppdatera</th>
+                    <th>Ta bort</th>
                 </tr>
                 {
                     customers.map((customer) => (
@@ -93,8 +93,8 @@ if(error) return <p>{error}</p>
                             <td>{customer.firstname} {customer.lastname}</td>
                             <td>{customer.email}</td>
                             <td>{customer.phone}</td>
-                            <td><button onClick={() => {deleteCustomerHandler(customer.id)}}>Ta bort</button></td>
-                            <td><button onClick={() => {handleClick(customer.id)}}>Uppdatera kundinformation</button></td>
+                            <td><button className="neutral-btn" onClick={() => {handleClick(customer.id)}}>Uppdatera kundinformation</button></td>
+                            <td><button className="alert-btn" onClick={() => {deleteCustomerHandler(customer.id)}}>Ta bort</button></td>
                         </tr>
                     )
                     )
