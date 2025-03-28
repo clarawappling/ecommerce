@@ -3,6 +3,7 @@ import { useOrder } from "../hooks/useOrder"
 import "../styles/ManageOrders.css"
 import { Link, useNavigate } from "react-router";
 import { formatDate } from "../utils/formatDate";
+import "../styles/ManageOrders.css"
 
 export const ManageOrders = () => {
 
@@ -24,19 +25,32 @@ export const ManageOrders = () => {
         <>
             <div>
                 <h1>Orderlista</h1>
-                <div className="order-list">
+                <div className="order-container">
+                    <table>
+                        <tr>
+                            <th>Order-nr</th>
+                            <th>Kundnamn</th>
+                            <th>Orderdatum</th>
+                            <th>Summa</th>
+                            <th>Status</th>
+                            <th>Uppdatera status</th>
+                            <th>Ta bort</th>
+                            
+                        </tr>
                     {
                         orders.map((order) => (
-                            <article className="order-item" key={order.id}>
-                                <Link className="order-link" to={`/admin/detailed-order/${order.id}`}> Order-id: {order.id}, {order.customer_firstname} {order.customer_lastname}</Link>
-                                <p>Orderdatum: {formatDate(order.created_at)}</p>
-                                <p>Totalt: {order.total_price} SEK</p>
-                                <p>Status: {order.order_status === "complete" ? "slutförd" : "pågående"}</p> 
-                                <button onClick={() => {deleteOrderHandler(order.id)}}>Ta bort</button>
-                                <button onClick={() => {handleClick(order.id)}}>Ändra orderstatus</button>
-                            </article>
+                            <tr key={order.id}>
+                                <td><Link className="order-link" to={`/admin/detailed-order/${order.id}`}>{order.id}</Link></td>
+                                <td>{order.customer_firstname} {order.customer_lastname}</td> 
+                                <td>{formatDate(order.created_at)}</td>
+                                <td>{order.total_price} SEK</td>
+                                <td>{order.order_status === "complete" ? "slutförd" : "pågående"}</td> 
+                                <td><button className="neutral-btn" onClick={() => {handleClick(order.id)}}>Ändra orderstatus</button></td>
+                                <td><button className="alert-btn" onClick={() => {deleteOrderHandler(order.id)}}>Ta bort</button></td>
+                            </tr>
                         ))
                     }
+                    </table>
                 </div>
             </div>
         </>
