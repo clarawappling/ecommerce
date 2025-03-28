@@ -1,30 +1,11 @@
-/* .order-list {
-    
-    border-radius: 3px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-} */
 
-/* .order-item {
-    background-color: rgb(236, 253, 247);
-    display: flex;
-    justify-content: space-between;
-    gap: 3px;
-    margin: 5px;
 
-} */
-
-.order-container {
-.order-link {
-        color:brown;
-        text-decoration: underline;
-}
+.customer-table {
 
 td {
     border: 1px solid #0f7e8617;
     border-collapse: collapse;
-    padding: 0.2rem;
+    padding: 0.1rem;
   }
 
   table { 
@@ -42,6 +23,12 @@ td {
     margin-top: 3rem;
   }
 
+  .add-customer-btn {
+    background-color: #0f865e44 ;
+    padding: 1rem;
+    margin: 2rem;
+  }
+
 
   @media screen and (max-width: 580px) {
     table th:nth-child(3),
@@ -53,19 +40,27 @@ td {
   @media screen and (max-width: 860px) {
     table th:nth-child(4),
     table td:nth-child(4),
-    table th:nth-child(3),
-    table td:nth-child(3)
+    table th:nth-child(1),
+    table td:nth-child(1)
     {
       display: none;
     }
   }
 
-  .neutral-btn {
-    background-color: rgba(184, 221, 221, 0.589);
+
+.alert-btn {
+    background-color: rgba(255, 119, 119, 0.473);
 }
 
-  .alert-btn {
-    background-color: rgba(255, 119, 119, 0.473);
+.neutral-btn {
+  background-color: rgba(184, 217, 221, 0.589);
+  padding: 1rem;
+}
+
+.happy-btn {
+  background-color: rgba(184, 221, 196, 0.87);
+  margin: 2rem;
+  padding: 1.5rem;
 }
 
 }
