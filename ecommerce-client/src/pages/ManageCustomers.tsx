@@ -74,8 +74,9 @@ if(error) return <p>{error}</p>
         <>
         <div>
             <h1>Kundregister</h1>
-            <button className= "add-customer-btn" onClick={handleCreate}>Lägg till ny kund</button>
+            
             <div className="customer-table">
+            <button className= "happy-btn" onClick={handleCreate}>Lägg till ny kund</button>
                 <table>
                 <tr>
 

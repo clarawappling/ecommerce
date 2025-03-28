@@ -4,6 +4,7 @@ import "../styles/ManageProducts.css"
 import { useNavigate } from "react-router";
 
 
+
 export const ManageProducts = () => {
     
     const navigate = useNavigate();
@@ -28,20 +29,32 @@ export const ManageProducts = () => {
 <>
         <div>
             <h1>Produktlista</h1>
-            <button onClick={handleCreate}>Lägg till produkt</button>
-            <div className="product-list">
+            
+            <div className="product-container">
+            <button className="happy-btn" onClick={handleCreate}>Lägg till produkt</button>
+                <table>
+                    <tr>
+                        <th>Produkt-id</th>
+                        <th>Namn</th>
+                        <th>Pris</th>
+                        <th>Lagersaldo</th>
+                        <th>Uppdatera</th>
+                        <th>Ta bort</th>
+                    </tr>
                 {
                     products.map((product) => (
-                        <article className="product-item" key={product.id}>
-                            <p>{product.name}</p>
-                            <p>{product.price} SEK</p>
-                            <p>{product.stock} st</p>
-                            <button onClick={() => {deleteProductHandler(product.id)}}>Ta bort</button>
-                            <button onClick={() => {handleClick(product.id)}}>Uppdatera produkt</button>
-                        </article>
+                        <tr className="product-container" key={product.id}>
+                            <td>{product.id}</td>
+                            <td>{product.name}</td>
+                            <td>{product.price} SEK</td>
+                            <td>{product.stock} st</td>
+                            <td><button className="neutral-btn" onClick={() => {handleClick(product.id)}}>Uppdatera produkt</button></td>
+                            <td><button className="alert-btn"onClick={() => {deleteProductHandler(product.id)}}>Ta bort</button></td>
+                        </tr>
                     )
                     )
                 }
+                </table>
             </div>
         </div>
         </>

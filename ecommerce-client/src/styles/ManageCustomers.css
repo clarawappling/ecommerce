@@ -1,4 +1,5 @@
 
+
 .customer-table {
 
 td {
@@ -46,13 +47,20 @@ td {
     }
   }
 
-  .neutral-btn {
-    background-color: rgba(184, 221, 221, 0.589);
-}
 
 .alert-btn {
     background-color: rgba(255, 119, 119, 0.473);
 }
 
+.neutral-btn {
+  background-color: rgba(184, 217, 221, 0.589);
+  padding: 1rem;
+}
+
+.happy-btn {
+  background-color: rgba(184, 221, 196, 0.87);
+  margin: 2rem;
+  padding: 1.5rem;
+}
 
 }
