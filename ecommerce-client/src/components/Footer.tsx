@@ -2,7 +2,7 @@ import "../styles/Footer.css"
 
 export const Footer = () => {
     return (
-        <div className="footer">
+        <div>
           <p>&copy; 2025 Juguetes Escondidos. All rights reserved.</p>
     <p>
         <a href="/">GDPR</a> | 
