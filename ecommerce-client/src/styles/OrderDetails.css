@@ -1,4 +1,11 @@
+
 .order-item {
-    background-color: rgb(243, 243, 243);
-    padding: 2rem;
+    button {
+        margin-top: 0.3rem;
+    }
+    .neutral-btn {
+        background-color: rgba(184, 217, 221, 0.589);
+        padding: 1rem;
+      }
+
 }
