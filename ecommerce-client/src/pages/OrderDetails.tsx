@@ -40,25 +40,26 @@ export const OrderDetails = () => {
         <p>{order?.customer_phone}</p>
         <i>{order?.customer_street_address}, </i>
         <i>{order?.customer_city}</i>
-
+        <br></br><br></br>
         <h3>Orderdetaljer</h3>
         <p>Orderdatum: {order ? formatDate(order.created_at) : ""}</p>
         <p>Orderstatus: {order?.order_status === "pending" ? "pågående" : "slutförd"}</p>
         <p>Betalning: {order?.payment_status === "paid" ? "genomförd" : "ej betalt"}</p>
         <p>Summa: {order?.total_price} SEK</p>
-
-        <h3>Produkter</h3>
+        <br></br>
+        <div className="order-items-container">
+        <h2>Produkter</h2>
         {order?.order_items.map((item) => {
           return (
             <div className="order-item" key={item.id}>
               <h4>{item.product_name}</h4>
               <p>Antal beställda: {item.quantity}</p>
               <p>À pris: {item.unit_price} SEK</p>
-              <button onClick={() => deleteOrderItemHandler(item.id)}>Ta bort</button>
-              <button onClick={() => {handleClick(item.id, item.quantity, item.product_name)}}>Ändra antal</button>
+              <button className="alert-btn"onClick={() => deleteOrderItemHandler(item.id)}>Ta bort</button>
+              <button className="neutral-btn"onClick={() => {handleClick(item.id, item.quantity, item.product_name)}}>Ändra antal</button>
             </div>
           )
-        })}
+        })} </div>
         </>
     )
 }
