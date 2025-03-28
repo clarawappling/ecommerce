@@ -1,0 +1,27 @@
+td {
+    border: 1px solid #0f7e8617;
+    border-collapse: collapse;
+    padding: 0.2rem;
+  }
+
+  table { 
+    border-collapse: collapse;
+  }
+
+  th {
+    padding: 1rem;
+    background-color: #0f7e8617;
+    border: solid 1px #0f7e8644;
+    
+  }
+
+  table {
+    margin-top: 3rem;
+  }
+
+  .add-customer-btn {
+    background-color: #0f865e44 ;
+    padding: 1rem;
+    margin: 2rem;
+  }
+
