@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react"
 import { useNavigate, useParams } from "react-router"
 import { OrderItemUpdate } from "../models/OrderItem"
 import { useOrderItem } from "../hooks/useOrderItem"
+import "../styles/UpdateOrderItem.css"
 
 export const UpdateOrderItem = () => {
     
