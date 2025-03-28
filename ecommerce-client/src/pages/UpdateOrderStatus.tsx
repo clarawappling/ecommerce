@@ -3,6 +3,7 @@ import { DetailedOrder } from "../models/Order"
 import { useNavigate, useParams } from "react-router";
 import { useOrder } from "../hooks/useOrder";
 import { formatDate } from "../utils/formatDate";
+import "../styles/UpdateOrderStatus.css"
 
 export const UpdateOrderStatus = () => {
     
@@ -48,7 +49,7 @@ export const UpdateOrderStatus = () => {
         <>
             <div className="update-order-status-container">
                 <h2>Uppdatera orderstatus</h2>
-                <h4>{order?.customer_firstname} {order?.customer_lastname}, order-id: {order?.id}, Skapad: {order ? formatDate(order.created_at) : "" }</h4>
+                <p>Kund: {order?.customer_firstname} {order?.customer_lastname}</p> <p>Order-nr: {order?.id}</p> <p>Orderdatum: {order ? formatDate(order.created_at) : "" }</p>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="order_status">Orderstatus: </label>
                     <select name="order_status" id="order_status" value={order?.order_status ?? ''}onChange={(e) => {handleChange(e)}}>
